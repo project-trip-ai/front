@@ -31,7 +31,6 @@ export default function ResetPasswordPage() {
       );
 
       const verifyResult = await verifyResponse.json();
-
       if (verifyResponse.ok) {
         const tokenPassword = verifyResult;
         setTokenPassword(tokenPassword);

@@ -1,6 +1,7 @@
 "use server";
 import { loginUser, registerUser } from "@/app/api";
 import { setCookie, removeCookie } from "../auth";
+import { redirect } from "next/navigation";
 
 export async function loginAction(formData) {
   const email = formData.get("email");
