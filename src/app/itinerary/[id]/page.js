@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function ItineraryPage() {
   return (
     <div className="min-h-screen flex">
-      <div className="w-full h-screen bg-white">
+      <div className="w-full h-screen bg-white no-scrollbar overflow-y-scroll">
         <div className="grid w-full h-80 content-between bg-gradient-to-b from-gray-700 via-gray-300 to-gray-700 px-10 py-5">
           <div className="w-full flex justify-between">
             <Button
@@ -40,6 +40,7 @@ export default function ItineraryPage() {
         <div className="p-10">
           <DayCard day={'Monday'} month={'December'} ordinal={'9th'} />
           <DayCard day={'Tuesday'} month={'December'} ordinal={'10th'} />
+          <DayCard day={'Wednesday'} month={'December'} ordinal={'11th'} />
         </div>
       </div>
 
