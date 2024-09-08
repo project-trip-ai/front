@@ -37,6 +37,7 @@ export default function ItineraryPage() {
         </div>
         <div className="p-10">
           <DayCard day={'Monday'} month={'December'} ordinal={'9th'} />
+          <DayCard day={'Tuesday'} month={'December'} ordinal={'10th'} />
         </div>
       </div>
 

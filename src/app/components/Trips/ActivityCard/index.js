@@ -1,7 +1,7 @@
 import Button from '../../Button';
 const ActivityCard = ({ image, name, startTime, endTime, price }) => {
   return (
-    <div className="flex w-full h-24">
+    <div className="flex mb-8 w-full h-24">
       <div className="flex w-full p-3 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 hover:border-gray-300">
         <div className="w-[70px] h-[70px] rounded-lg bg-gray-300 shadow-sm"></div>
         <div className="ml-3">
