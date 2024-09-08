@@ -22,3 +22,10 @@ export const removeCookie = async () => {
   const cookieStore = cookies();
   cookieStore.delete("token");
 };
+
+export default function isUserLoggedIn() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
+  return !!token;
+}

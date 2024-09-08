@@ -1,4 +1,5 @@
 import RegisterForm from "@/app/components/RegisterForm";
+import Link from "next/link";
 
 export const metadata = {
   title: "Register | Your App Name",
@@ -10,6 +11,7 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
       <div className="w-full max-w-md">
         <RegisterForm />
+        <Link href="/auth/login">Already have an account log in</Link>
       </div>
     </div>
   );
