@@ -1,13 +1,21 @@
-import AngleRight from "../../../../../public/icons/angle-right.svg"
-const DayCard = ({ day, month,  ordinal }) => {
-  
-    return (
-      <div className="text-2xl">
-        <p>{day}, {month} {ordinal}</p>
-        <div className="h-[1px] w-full bg-gray-300 my-4"></div>
+import ActivityCard from '../ActivityCard';
+import AngleRight from '../../../../../public/icons/angle-right.svg';
+import Image from 'next/image';
+
+const DayCard = ({ day, month, ordinal }) => {
+  return (
+    <div>
+      <div className="flex">
+        <Image priority src={AngleRight} />
+        <p className="text-2xl">
+          {day}, {month} {ordinal}
+        </p>
       </div>
-    );
-  };
-  
-  export default DayCard;
-  
+
+      <div className="h-[1px] w-full bg-gray-300 my-8"></div>
+      <ActivityCard />
+    </div>
+  );
+};
+
+export default DayCard;
