@@ -1,5 +1,7 @@
 import Button from '@/app/components/Button';
 import DayCard from '@/app/components/Trips/DayCard';
+import ArrowLeft from '../../../../public/icons/arrow-left.svg';
+import Image from 'next/image';
 
 export default function ItineraryPage() {
   return (
@@ -11,7 +13,7 @@ export default function ItineraryPage() {
               rounded="rounded-md"
               opacity="bg-opacity-20"
               hover="hover:bg-opacity-50">
-              Back
+              <Image priority src={ArrowLeft} alt="Back Arrow" />
             </Button>
             <Button opacity="bg-opacity-20" hover="hover:bg-opacity-50">
               Share

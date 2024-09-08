@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ActivityCard from '../ActivityCard';
 import AngleRight from '../../../../../public/icons/angle-right.svg';
 import Image from 'next/image';
+import Input from '../../Input';
 
 const DayCard = ({ day, month, ordinal }) => {
   // State to manage whether the arrow is rotated and the ActivityCard is visible
@@ -33,7 +34,17 @@ const DayCard = ({ day, month, ordinal }) => {
       <div className="h-[1px] w-full bg-gray-300 my-8"></div>
 
       {/* Conditionally show the ActivityCard */}
-      {isOpen && <ActivityCard />}
+      {isOpen && (
+        <div className="space-y-5 pb-10">
+          <Input
+            id="searchPlace"
+            name="searchPlace"
+            type="search"
+            placeholder="Search for a place"
+          />
+          <ActivityCard />
+        </div>
+      )}
     </div>
   );
 };
