@@ -1,6 +1,6 @@
 "use server";
 import { loginUser, registerUser } from "@/app/api";
-import { setCookie } from "../auth";
+import { setCookie, removeCookie } from "../auth";
 
 export async function loginAction(formData) {
   const email = formData.get("email");
@@ -29,16 +29,17 @@ export async function loginAction(formData) {
 export async function registerAction(formData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  const firstName = formData.get("firstName");
-  const lastName = formData.get("lastName");
+  const firstname = formData.get("firstname");
+  const lastname = formData.get("lastname");
 
-  if (!email || !password || !firstName || !lastName) {
+  if (!email || !password || !firstname || !lastname) {
     return { error: "All fields are required" };
   }
 
   try {
-    const userData = { email, password, firstName, lastName };
+    const userData = { email, password, firstname, lastname };
     const data = await registerUser(userData);
+    console.log(data, "data");
 
     if (data.token) {
       await setCookie(data.token);
@@ -52,4 +53,9 @@ export async function registerAction(formData) {
       error: "Registration failed: " + (error.message || String(error)),
     };
   }
+}
+
+export async function logout() {
+  removeCookie();
+  redirect(`/auth/login`);
 }

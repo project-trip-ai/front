@@ -25,8 +25,8 @@ export default function RegisterForm() {
       </h2>
       <form action={handleSubmit} className="space-y-4">
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-        <Input label="First Name" id="firstName" name="firstName" required />
-        <Input label="Last Name" id="lastName" name="lastName" required />
+        <Input label="First Name" id="firstname" name="firstname" required />
+        <Input label="Last Name" id="lastname" name="lastname" required />
         <Input
           label="Email Address"
           id="email"
