@@ -1,7 +1,5 @@
-const BASE_URL = "http://localhost:3000/api";
-
 export const registerUser = async (userData) => {
-  const response = await fetch(`${BASE_URL}/register`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +15,7 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = async (userData) => {
-  const response = await fetch(`${BASE_URL}/login`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +31,7 @@ export const loginUser = async (userData) => {
 };
 
 export const sendNumber = async (telData) => {
-  const response = await fetch(`${BASE_URL}/verifyTel`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/verifyTel`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +45,7 @@ export const sendNumber = async (telData) => {
   return data;
 };
 export const sendCode = async (code) => {
-  const response = await fetch(`${BASE_URL}/verifyCode`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/verifyCode`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +60,7 @@ export const sendCode = async (code) => {
 };
 
 export const resetPassword = async (resetData) => {
-  const response = await fetch(`${BASE_URL}/resetPassword`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

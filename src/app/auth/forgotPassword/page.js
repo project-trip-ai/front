@@ -6,14 +6,13 @@ export default function ForgotPasswordPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const BASE_URL = "http://localhost:3000/api";
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
 
     try {
-      const response = await fetch(`${BASE_URL}/verifyMail`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/verifyMail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

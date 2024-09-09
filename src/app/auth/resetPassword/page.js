@@ -20,7 +20,7 @@ export default function ResetPasswordPage() {
 
     try {
       const verifyResponse = await fetch(
-        "http://localhost:3000/api/verifyCode",
+        `${process.env.NEXT_PUBLIC_BASE_URL}/verifyCode`,
         {
           method: "POST",
           headers: {
@@ -35,7 +35,7 @@ export default function ResetPasswordPage() {
         const tokenPassword = verifyResult;
         setTokenPassword(tokenPassword);
         const resetResponse = await fetch(
-          "http://localhost:3000/api/resetPassword",
+          `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
           {
             method: "POST",
             headers: {
