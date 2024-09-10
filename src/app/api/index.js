@@ -73,3 +73,16 @@ export const resetPassword = async (resetData) => {
   const data = await response.json();
   return data;
 };
+
+export const getUser = async (token) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/getUser/${token}`, {
+    method: "GET",
+    credentials: 'include', 
+  });
+  if (!response.ok) {
+    throw new Error("Failed to get user");
+  }
+  const data = await response.json();
+  return data;
+};
+
