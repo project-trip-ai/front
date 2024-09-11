@@ -30,8 +30,7 @@ export default function SubscriptionPage() {
     await stripe.redirectToCheckout({ sessionId: data.id })
 }
   return (
-    <div>
-      page
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
       <div className="flex gap-[40px]">
        {subscriptions.map((sub) => (
         <DealCard tier={sub.name} features={sub.features} price={sub.price} key={sub.id} onBuyNow={() => handleCheckout(sub)}/>

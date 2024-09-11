@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/app/components/Partials/Header";
+import Footer from "./components/Partials/Footer";
 import isUserLoggedIn from "@/app/lib/auth";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
         <Header isLoggedIn={isLoggedIn} />
         {children}
+        <Footer/>
       </body>
     </html>
   );

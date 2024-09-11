@@ -3,11 +3,10 @@ import Banner from "../../public/banner.png";
 
 export default function Home() {
   return (
-    <div>
-      <div className="min-h-dvh ">
-        {/* <img src={Banner.src} className="w-full h-full fit-cover" /> */}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <div className="w-full max-w-md">
+        home
       </div>
-      homeeee
     </div>
   );
 }
