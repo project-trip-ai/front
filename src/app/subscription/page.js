@@ -30,11 +30,17 @@ export default function SubscriptionPage() {
     await stripe.redirectToCheckout({ sessionId: data.id })
 }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
-      <div className="flex gap-[40px]">
-       {subscriptions.map((sub) => (
-        <DealCard tier={sub.name} features={sub.features} price={sub.price} key={sub.id} onBuyNow={() => handleCheckout(sub)}/>
-        ))}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 pt-10">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-white">Titre</h2>
+            <p className="mb-5 font-light text-gray-200 sm:text-xl">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without  </p>
+        </div>
+        <div className="flex gap-[40px]">
+        {subscriptions.map((sub) => (
+          <DealCard tier={sub.name} features={sub.features} price={sub.price} key={sub.id} onBuyNow={() => handleCheckout(sub)}/>
+          ))}
+        </div>
       </div>
     </div>
   );
