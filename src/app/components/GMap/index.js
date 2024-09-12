@@ -30,12 +30,15 @@ const GMap = ({ position = { lat: 53.54, lng: 10 } }) => {
           defaultCenter={mapCenter}
           mapId={process.env.NEXT_PUBLIC_MAP_ID}
           disableDefaultUI={true}
-          onClick={handleMapClick}>
+          onClick={handleMapClick}
+          onLoad={map => console.log('Map Loaded:', map)} // Ensure map is loaded
+        >
           <Markers
             points={positionList}
             setActiveMarker={setActiveMarker}
             setMapCenter={setMapCenter}
             activeMarker={activeMarker}
+            mapCenter={mapCenter} // Pass the mapCenter state down
           />
         </Map>
       </div>
@@ -55,24 +58,28 @@ const Markers = ({
   const map = useMap();
 
   useEffect(() => {
-    if (!map) return;
+    if (!map) {
+      console.log("Map hasn't loaded yet");
+      return;
+    }
 
-    map.panTo({ lat: -34.397, lng: 150.644 });
-    console.log(mapCenter);
-  }, [mapCenter]);
+    // Log the current map center before panTo is called
+    console.log('Current map center before pan:', mapCenter);
+
+    map.panTo(mapCenter);
+  }, [mapCenter, map]); // Trigger effect on mapCenter or map change
 
   const handleMarkerClick = (index, position) => {
     setActiveMarker(index);
-    setMapCenter(position); // Close the InfoWindow when clicking on the map
+    setMapCenter(position); // Set the new center when a marker is clicked
   };
 
   return (
     <>
       {points.map((point, index) => (
-        <>
+        <div key={index}>
           <AdvancedMarker
             position={point}
-            key={index}
             onClick={() => handleMarkerClick(index, point)}>
             <Pin
               background={'#fceba4'}
@@ -83,7 +90,6 @@ const Markers = ({
           {activeMarker === index && (
             <InfoWindow
               position={point}
-              key={index}
               headerDisabled={true}
               onCloseClick={() => setActiveMarker(null)} // Close the InfoWindow
             >
@@ -97,7 +103,7 @@ const Markers = ({
               </div>
             </InfoWindow>
           )}
-        </>
+        </div>
       ))}
     </>
   );
