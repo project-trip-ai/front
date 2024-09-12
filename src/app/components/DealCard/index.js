@@ -1,15 +1,15 @@
-const SubscriptionCard = ({ tier, price, features }) => {
+const SubscriptionCard = ({ tier, price, features, onBuyNow }) => {
   const getTierColor = (tier) => {
     if (!tier) return "bg-gray-100 text-gray-800";
     switch (tier.toLowerCase()) {
-      case "basic":
+      case "1 month subscription":
         return "bg-blue-100 text-blue-800";
-      case "premium":
+      case "3 months subscription":
         return "bg-purple-100 text-purple-800";
-      case "pro":
+      case "6 months subscription":
         return "bg-green-100 text-green-800";
-      default:
-        return "bg-gray-100 text-gray-800";
+      case "1 year subscription":
+        return "bg-red-100 text-red-800";
     }
   };
 
@@ -24,18 +24,9 @@ const SubscriptionCard = ({ tier, price, features }) => {
           >
             {tier}
           </div>
-          &#9734;
-          {/* <Star className="text-yellow-400" size={24} /> */}
         </div>
-        <p className="text-gray-700 text-base mb-2">
-          Your current subscription
-        </p>
         <div className="flex items-center justify-between mb-4">
           <span className="text-3xl font-bold text-gray-900">${price}</span>
-          <span className="text-sm text-gray-600 flex items-center">
-            {/* <Calendar className="mr-1" size={16} /> */}
-            &#xf073; per month
-          </span>
         </div>
         <ul className="text-sm text-gray-600">
           {features.map((feature, index) => (
@@ -46,6 +37,12 @@ const SubscriptionCard = ({ tier, price, features }) => {
             </li>
           ))}
         </ul>
+        <button
+          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          onClick={onBuyNow}
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );

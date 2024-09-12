@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-
+import { getUser } from "@/app/api";
 export const setCookie = async (token) => {
   const cookieStore = cookies();
   await cookieStore.set({
@@ -23,9 +23,13 @@ export const removeCookie = async () => {
   cookieStore.delete("token");
 };
 
-export default function isUserLoggedIn() {
+export default async function isUserLoggedIn() {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
-
-  return !!token;
+  try {
+    const userData = await getUser(token.value);
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
