@@ -41,7 +41,9 @@ const DayCard = ({ day, month, ordinal }) => {
             name="searchPlace"
             type="search"
             placeholder="Search for a place"
+            focus="focus:border-gray-400"
           />
+          <ActivityCard />
           <ActivityCard />
         </div>
       )}
