@@ -41,15 +41,15 @@ const ChicHeader = ({ isLoggedIn }) => {
     };
   }, []);
 
+
   return (
-    <header className={`z-10 px-4 lg:px-6 py-2.5 w-full transition-all duration-300 ${
+    <header className={`z-20 px-4 lg:px-6 py-2.5 w-full transition-all duration-300 ${
       isScrolled
         ? 'fixed top-0 left-0 bg-gray-800 bg-opacity-50'
         : 'absolute top-0 left-0 bg-transparent'
     }`}>
       <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-         <Link href="/" className="flex items-center">
-            {/* <img className="h-8 w-auto" alt="Logo" /> */}
+         <Link href="/" onClick={() => handleLinkClick('/')} className={`flex items-center ${activeLink === '/' ? '' : 'text-white'}`}>
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Wizard Planner</span>
           </Link>
         <div className="flex items-center lg:order-2">
@@ -82,19 +82,19 @@ const ChicHeader = ({ isLoggedIn }) => {
             <svg className={`w-6 h-6 ${isMenuOpen ? 'block' : 'hidden'}`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
           </button>
         </div>
-        <div className={`justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`} id="mobile-menu-2">
+        <div className={`z-10 px-10 py-2 rounded-lg bg-gray-900 bg-opacity-50 justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`} id="mobile-menu-2">
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
             <Link
               href="/plan-trip"
               onClick={() => handleLinkClick('/plan-trip')}
-              className={`block py-2 pr-4 pl-3 border-b border-white hover:bg-white hover:text-gray-900 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-white dark:hover:bg-white dark:hover:text-gray-900 lg:dark:hover:bg-transparent text-xl ${activeLink === '/plan-trip' ? 'font-bold' : 'text-white'}`}
+              className={`block rounded-lg py-2 pr-4 pl-3 border-b border-white hover:underline lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-white dark:hover:underline lg:dark:hover:bg-transparent text-xl ${activeLink === '/plan-trip' ? 'underline' : 'no-underline text-white'}`}
             >
-              Plan Your Trip
+              Plan your trip
             </Link>
             <Link
               href="/subscription"
               onClick={() => handleLinkClick('/subscription')}
-              className={`block py-2 pr-4 pl-3 border-b border-white hover:bg-white hover:text-gray-900 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-white dark:hover:bg-white dark:hover:text-gray-900 lg:dark:hover:bg-transparent text-xl ${activeLink === '/subscription' ? 'font-bold' : 'text-white'}`}
+              className={`block rounded-lg py-2 pr-4 pl-3 border-b border-white hover:underline lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-white dark:hover:underline lg:dark:hover:bg-transparent text-xl ${activeLink === '/subscription' ? 'underline' : 'no-underline text-white'}`}
             >
               Price
             </Link>

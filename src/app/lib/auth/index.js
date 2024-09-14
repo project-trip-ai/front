@@ -23,7 +23,7 @@ export const removeCookie = async () => {
   cookieStore.delete("token");
 };
 
-export default async function isUserLoggedIn() {
+export async function isUserLoggedIn() {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   try {
@@ -33,3 +33,15 @@ export default async function isUserLoggedIn() {
     return false;
   }
 }
+
+export async function getUserCookies() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  try {
+    const userData = await getUser(token.value);
+    return userData;
+  } catch (error) {
+    return false;
+  }
+}
+
