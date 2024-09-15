@@ -36,7 +36,7 @@ export default function SubscriptionPage() {
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-white">Join us 🤝</h2>
             <p className="mb-5 font-light text-gray-200 sm:text-xl">Subscribe now to unlock exclusive features and get the most out of your travel planning experience</p>
         </div>
-        <div className="flex gap-[40px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {subscriptions.map((sub) => (
           <DealCard tier={sub.name} features={sub.features} price={sub.price} key={sub.id} onBuyNow={() => handleCheckout(sub)}/>
           ))}
