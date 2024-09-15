@@ -2,8 +2,8 @@ export default function Contact() {
   return(
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 pt-10">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact us</h2>
-          <p className="mb-8 lg:mb-16 font-light text-center text-white dark:text-white sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
+          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact us 📧</h2>
+          <p className="mb-8 lg:mb-16 font-light text-center text-white dark:text-white sm:text-xl">Got questions or need assistance? We're here to help! Reach out to us for any inquiries, feedback, or support. Our team is ready to ensure your travel planning experience is seamless and enjoyable. Contact us today!</p>
           <form action="#" className="space-y-8">
               <div>
                   <label for="email" className="block mb-2 text-lg font-medium text-white dark:text-white">Your email :</label>
