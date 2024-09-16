@@ -5,6 +5,7 @@ import ActivityCard from '../ActivityCard';
 import AngleRight from '../../../../../public/icons/angle-right.svg';
 import Image from 'next/image';
 import Input from '../../Input';
+import AutoComplete from '../../AutoComplete';
 
 const DayCard = ({ day, month, ordinal }) => {
   // State to manage whether the arrow is rotated and the ActivityCard is visible
@@ -36,13 +37,7 @@ const DayCard = ({ day, month, ordinal }) => {
       {/* Conditionally show the ActivityCard */}
       {isOpen && (
         <div className="space-y-5 pb-10">
-          <Input
-            id="searchPlace"
-            name="searchPlace"
-            type="search"
-            placeholder="Search for a place"
-            focus="focus:border-gray-400"
-          />
+          <AutoComplete />
           <ActivityCard />
           <ActivityCard />
         </div>

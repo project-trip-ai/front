@@ -23,26 +23,24 @@ const GMap = ({ position = { lat: 53.54, lng: 10 } }) => {
   };
 
   return (
-    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="h-full w-full">
-        <Map
-          defaultZoom={10}
-          defaultCenter={mapCenter}
-          mapId={process.env.NEXT_PUBLIC_MAP_ID}
-          disableDefaultUI={true}
-          onClick={handleMapClick}
-          onLoad={map => console.log('Map Loaded:', map)} // Ensure map is loaded
-        >
-          <Markers
-            points={positionList}
-            setActiveMarker={setActiveMarker}
-            setMapCenter={setMapCenter}
-            activeMarker={activeMarker}
-            mapCenter={mapCenter} // Pass the mapCenter state down
-          />
-        </Map>
-      </div>
-    </APIProvider>
+    <div className="h-full w-full">
+      <Map
+        defaultZoom={10}
+        defaultCenter={mapCenter}
+        mapId={process.env.NEXT_PUBLIC_MAP_ID}
+        disableDefaultUI={true}
+        onClick={handleMapClick}
+        onLoad={map => console.log('Map Loaded:', map)} // Ensure map is loaded
+      >
+        <Markers
+          points={positionList}
+          setActiveMarker={setActiveMarker}
+          setMapCenter={setMapCenter}
+          activeMarker={activeMarker}
+          mapCenter={mapCenter} // Pass the mapCenter state down
+        />
+      </Map>
+    </div>
   );
 };
 
@@ -93,13 +91,13 @@ const Markers = ({
               headerDisabled={true}
               onCloseClick={() => setActiveMarker(null)} // Close the InfoWindow
             >
-              <div className="flex space-x-3">
+              <div className="flex space-x-4 py-1">
                 <div>
                   <h1 className="font-medium text-lg">Tokyo Tower</h1>
                   <p>Restaurant</p>
                   <p>Description {index + 1}</p>
                 </div>
-                <div className="h-32 w-32 rounded-lg bg-gray-200"></div>
+                <div className="h-40 w-40 rounded-lg bg-gray-200"></div>
               </div>
             </InfoWindow>
           )}
