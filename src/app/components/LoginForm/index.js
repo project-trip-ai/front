@@ -19,7 +19,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-2xl transform transition-all hover:scale-105 duration-300">
+    <div className="bg-white p-8 rounded-xl shadow-2xl">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Welcome 😊
       </h2>

@@ -31,7 +31,7 @@ Our mission is simple: connect you to the world and empower you to travel your w
                   <div
                       className="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-gray-100 rounded-3xl sm:border border-gray-200 relative">
                       <img className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
-                          src="https://pagedone.io/asset/uploads/1717742431.png" alt="about Us image" />
+                          src="/about/trip.jpg" alt="about Us image" />
                   </div>
               </div>
           </div>
@@ -43,7 +43,7 @@ Our mission is simple: connect you to the world and empower you to travel your w
         </div> 
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3">
             <div className="text-center text-white">
-                <img className="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar"></img>
+                <img className="mx-auto mb-4 w-24 h-36 rounded-full" src="/about/yaya.png" alt="Bonnie Avatar"></img>
                 <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     <p>Ngoc Ha Lan DANG</p>
                 </h3>
@@ -51,7 +51,7 @@ Our mission is simple: connect you to the world and empower you to travel your w
             </div>
             
             <div className="text-center text-white">
-                <img className="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar"></img>
+                <img className="mx-auto mb-4 w-24 h-36 rounded-full" src="/about/ryme.png" alt="Bonnie Avatar"></img>
                 <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     <p>Ryme LEHNA</p>
                 </h3>
@@ -59,7 +59,7 @@ Our mission is simple: connect you to the world and empower you to travel your w
             </div>
 
             <div className="text-center text-white">
-                <img className="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar"></img>
+                <img className="mx-auto mb-4 w-24 h-36 rounded-full" src="/about/ks.png" alt="Bonnie Avatar"></img>
                 <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     <p>Kejsi EGRO</p>
                 </h3>
