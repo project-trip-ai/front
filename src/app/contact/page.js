@@ -19,7 +19,7 @@ export default function Contact() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/new-email`,
+        `${process.env.NEXT_PUBLIC_BACK_URL}/new-email`,
         {
           method: 'POST',
           headers: {
