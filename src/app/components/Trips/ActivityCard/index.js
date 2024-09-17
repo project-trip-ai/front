@@ -8,11 +8,9 @@ const ActivityCard = ({ image, name, startTime, endTime, price }) => {
           <p>teamLab Planets TOKYO</p>
           <div className="flex mt-2 items-center">
             <Button
-              border="border"
-              borderColor="border-gray-300"
-              fontColor="text-gray-500"
-              fontSize="text-xs"
-              rounded="rounded-xl">
+              buttonStyle={
+                'border border-gray-300 text-gray-500 text-xs rounded-xl'
+              }>
               10:00 AM - 11:00 AM
             </Button>
             <p className="mx-2"> • </p>

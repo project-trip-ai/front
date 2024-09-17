@@ -14,17 +14,15 @@ export default function ItineraryPage() {
         <div className="relative w-full h-screen bg-white no-scrollbar overflow-y-scroll overflow-x-clip">
           <div className="z-10 w-full flex sticky top-0 py-2 px-10  justify-between bg-white bg-opacity-80 backdrop-blur-sm">
             <Button
-              rounded="rounded-md"
-              bgColor="bg-gray-300"
-              opacity="bg-opacity-20"
-              hover="hover:bg-opacity-50">
+              buttonStyle={
+                'rounded-md bg-gray-300 bg-opacity-20 hover:bg-opacity-50'
+              }>
               <Image priority src={ArrowLeft} alt="Back Arrow" />
             </Button>
             <Button
-              fontColor="text-black font-medium"
-              bgColor="bg-gray-300"
-              opacity="bg-opacity-20"
-              hover="hover:bg-opacity-50">
+              buttonStyle={
+                'text-black font-medium bg-gray-300 bg-opacity-20 hover:bg-opacity-50'
+              }>
               Share
             </Button>
           </div>
@@ -32,16 +30,10 @@ export default function ItineraryPage() {
             <div className="absolute inset-x-10 bottom-10 w-full">
               <h1 className="text-5xl font-extrabold text-white">Country</h1>
               <div className="flex space-x-2 mt-4">
-                <Button
-                  border="border"
-                  borderColor="border-gray-400"
-                  opacity="bg-opacity-10">
+                <Button buttonStyle={'border border-gray-400 bg-opacity-10'}>
                   09 Dec 24
                 </Button>
-                <Button
-                  border="border"
-                  borderColor="border-gray-400"
-                  opacity="bg-opacity-10">
+                <Button buttonStyle={'border border-gray-400 bg-opacity-10'}>
                   2 People
                 </Button>
               </div>

@@ -11,6 +11,21 @@ const DayCard = ({ day, month, ordinal }) => {
   // State to manage whether the arrow is rotated and the ActivityCard is visible
   const [isOpen, setIsOpen] = useState(false);
 
+  const options = {
+    componentRestrictions: { country: 'jp' },
+    fields: [
+      'geometry',
+      'name',
+      'rating',
+      'price_level',
+      'international_phone_number',
+      'formatted_address',
+      'photos',
+      'types',
+      'url',
+    ], // Champs récupérés
+  };
+
   // Function to handle toggle click
   const handleToggle = () => {
     setIsOpen(!isOpen); // Toggle the state
@@ -37,7 +52,10 @@ const DayCard = ({ day, month, ordinal }) => {
       {/* Conditionally show the ActivityCard */}
       {isOpen && (
         <div className="space-y-5 pb-10">
-          <AutoComplete />
+          <AutoComplete
+            autoCompleteOptions={options}
+            placeholderText={'Search for a place'}
+          />
           <ActivityCard />
           <ActivityCard />
         </div>

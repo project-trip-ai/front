@@ -30,7 +30,7 @@ const Input = React.forwardRef(
           placeholder={placeholder}
           required={required}
           ref={ref} // La ref est maintenant correctement passée à l'élément input
-          className={`w-full px-3 py-2 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+          className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
                    focus:outline-none ${focus} focus:ring-0`}
         />
       </div>
