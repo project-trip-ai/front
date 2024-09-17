@@ -31,8 +31,9 @@ export default function PlanTripPage() {
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState('');
   const [groupSelected, setGroupSelected] = useState(null);
-  const [dietSelected, setDietSelected] = useState('');
+  const [dietSelected, setDietSelected] = useState(0);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [error, setError] = useState('');
   const router = useRouter();
   const [formData, setFormData] = useState({
     destination: '',
@@ -44,8 +45,9 @@ export default function PlanTripPage() {
     startDate: startDate,
     endDate: endDate,
     typeGroup: 'SOLO',
-    regimeAlimentaire: '',
+    regimeAlimentaire: 'NONE',
     userId: user?.id || '',
+    token: user?.token || '',
   });
 
   const options = {
@@ -120,6 +122,7 @@ export default function PlanTripPage() {
     setFormData(prevFormData => ({
       ...prevFormData,
       userId: user.id,
+      token: user.token,
     }));
   }, [user]);
 
@@ -141,8 +144,10 @@ export default function PlanTripPage() {
     console.log("voici l 'itinéraire : ", formData);
     const result = await createItineraryAction(formData);
     if (result.error) {
+      setError(result.error);
       console.log("voici l'erreur : ", result.error);
     } else if (result.success) {
+      setError('');
       console.log("bravo c'est créer !! : ", result);
       // router.push('/account/profile');
     }
@@ -223,6 +228,7 @@ export default function PlanTripPage() {
             ''
           )}
           <div className="flex flex-col items-center justify-center">
+            {error ? <p className="text-red-500">{error}</p> : <></>}
             <Button
               buttonStyle="mt-14 rounded-full text-white bg-amber-600 hover:bg-amber-500"
               padding="px-6 py-2"
