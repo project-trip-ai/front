@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import Input from '../Input';
 
@@ -7,6 +7,7 @@ const AutoComplete = ({
   placeholderText,
   maxWidth = 400,
   required,
+  onPlaceSelected, // Ajout de la prop pour le callback
 }) => {
   const [inputValue, setInputValue] = useState(''); // Stocke la valeur de l'input
   const [selectedPlace, setSelectedPlace] = useState(null); // Stocke le lieu sélectionné
@@ -31,22 +32,29 @@ const AutoComplete = ({
     autocompleteRef.current.addListener('place_changed', () => {
       const place = autocompleteRef.current.getPlace();
       if (place && place.geometry) {
-        setSelectedPlace(place); // Met à jour l'état avec le lieu sélectionné
-
-        // Si des photos sont disponibles, récupère l'URL de la première photo
+        // Récupérer l'URL de la photo s'il y en a
+        let photoUrl = null;
         if (place.photos && place.photos.length > 0) {
-          const url = place.photos[0].getUrl({ maxWidth: maxWidth }); // Récupère l'URL de la photo
-          setPhotoUrl(url); // Met à jour l'état avec l'URL de la photo
-        } else {
-          setPhotoUrl(null); // Si pas de photos, pas d'URL
+          photoUrl = place.photos[0].getUrl({ maxWidth: maxWidth }); // Récupère l'URL de la photo
         }
+
+        // Ajouter photoUrl à l'objet place
+        const updatedPlace = {
+          ...place,
+          photoUrl, // Ajout de la propriété photoUrl à place
+        };
+
+        setSelectedPlace(updatedPlace); // Met à jour l'état avec le lieu sélectionné et photoUrl
+
+        // Appeler la fonction de rappel si elle est définie pour informer le parent
+        if (onPlaceSelected) {
+          onPlaceSelected(updatedPlace); // Passe le lieu sélectionné (avec photoUrl) au parent via le callback
+        }
+
+        setPhotoUrl(photoUrl); // Met à jour l'état avec l'URL de la photo
       }
     });
   }, [places]);
-
-  useEffect(() => {
-    console.log('voici la place : ', selectedPlace);
-  }, [selectedPlace]);
 
   const handleChange = event => {
     setInputValue(event.target.value); // Met à jour l'état avec la valeur de l'input
@@ -64,14 +72,6 @@ const AutoComplete = ({
         placeholder={placeholderText}
         required={required}
       />
-      {/* <input
-        ref={inputRef} // Référence pour l'auto-complétion
-        type="text"
-        value={inputValue}
-        onChange={handleChange}
-        className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Search for a place"
-      /> */}
     </div>
   );
 };

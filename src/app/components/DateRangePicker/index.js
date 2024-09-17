@@ -31,11 +31,12 @@ const DateRangePicker = ({ onDateChange }) => {
 
       <input
         type="date"
-        min={startDate}
+        min={today}
         max={endDate}
         value={startDate}
         onChange={handleStartDateChange}
         className="border border-gray-300 hover:border-gray-400 hover:bg-gray-100 p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+        required
       />
       <p>to</p>
       <input
@@ -45,6 +46,7 @@ const DateRangePicker = ({ onDateChange }) => {
         onChange={handleEndDateChange}
         className="border border-gray-300 hover:border-gray-400 hover:bg-gray-100 p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
         min={startDate} // La date de fin ne peut pas être avant la date de début
+        required
       />
     </div>
   );
