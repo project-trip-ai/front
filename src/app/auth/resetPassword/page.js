@@ -12,53 +12,80 @@ export default function ResetPasswordPage() {
   const codeString = searchParams.get("code");
   const code = parseInt(codeString, 10);
   const email = searchParams.get("email");
+  const token = searchParams.get("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
 
-    try {
-      const verifyResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/verifyCode`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code, email }),
-        }
-      );
-
-      const verifyResult = await verifyResponse.json();
-      if (verifyResponse.ok) {
-        const tokenPassword = verifyResult;
-        setTokenPassword(tokenPassword);
-        const resetResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
+    if(token && email){
+      try {
+        const updatePassword = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/updatePassword`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ tokenPassword, email, password }),
+            body: JSON.stringify({ email, password, token }),
           }
         );
-
-        const resetResult = await resetResponse.json();
-
-        if (resetResponse.ok) {
-          setMessage("Password reset successfully");
-          router.push("/auth/login");
-        } else {
-          setError(resetResult.message || "Failed to reset password.");
-        }
-      } else {
-        setError(verifyResult.message || "Invalid verification code.");
+  
+          if (updatePassword.ok) {
+            setMessage("Password reset successfully");
+            router.push("/auth/login");
+          } else {
+            setError("Failed to reset password.");
+          }
+      } catch (error) {
+        setError("Failed to reset password. Please try again.");
       }
-    } catch (err) {
-      setError("Failed to reset password. Please try again.");
     }
+    else{
+      try {
+        const verifyResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/verifyCode`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ code, email }),
+          }
+        );
+  
+        const verifyResult = await verifyResponse.json();
+        if (verifyResponse.ok) {
+          const tokenPassword = verifyResult;
+          setTokenPassword(tokenPassword);
+          const resetResponse = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ tokenPassword, email, password }),
+            }
+          );
+  
+          const resetResult = await resetResponse.json();
+  
+          if (resetResponse.ok) {
+            setMessage("Password reset successfully");
+            router.push("/auth/login");
+          } else {
+            setError(resetResult.message || "Failed to reset password.");
+          }
+        } else {
+          setError(verifyResult.message || "Invalid verification code.");
+        }
+      } catch (err) {
+        setError("Failed to reset password. Please try again.");
+      }
+    }
+    
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
