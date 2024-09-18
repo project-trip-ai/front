@@ -61,11 +61,15 @@ export default function ItineraryPage() {
   }, [id]);
   // Show a loading state until the id is available
   if (!itineraryData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-16 h-16 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+      </div>
+    );
   }
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="min-h-screen flex">
+      <div className="min-h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 pt-16">
         <div className="relative w-full h-screen bg-white no-scrollbar overflow-y-scroll overflow-x-clip">
           <div className="z-10 w-full flex sticky top-0 py-2 px-10  justify-between bg-white bg-opacity-80 backdrop-blur-sm">
             <Button

@@ -15,7 +15,7 @@ export default function RegisterForm() {
     if (result.error) {
       setError(result.error);
     } else if (result.success) {
-      router.push("/dashboard");
+      router.push("/auth/login");
     }
   }
 

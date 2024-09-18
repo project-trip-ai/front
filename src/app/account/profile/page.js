@@ -8,6 +8,7 @@ export default function ProfilePage() {
   const { user } = useUser();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstname: user?.firstname || '',
@@ -55,7 +56,17 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    if (user !== undefined) {
+    if (user) {
+      if(user.sub){
+        const now = new Date();
+        const expirationDate = new Date(user.sub.expirationDate);
+
+        if (expirationDate < now) {
+          setStatus('EXPIRED');
+        } else {
+          setStatus('ACTIVE'); 
+        }
+      }
       setLoading(false);
     }
   }, [user]);
@@ -226,7 +237,7 @@ export default function ProfilePage() {
                                 })}
                                 </td>
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {user.sub.status}
+                                    {status}
                                 </td>
                             </tr>
                         </tbody>

@@ -45,7 +45,7 @@ export default function PlanTripPage() {
     startDate: startDate,
     endDate: endDate,
     typeGroup: 'SOLO',
-    regimeAlimentaire: 'NONE',
+    regimeAlimentaire: 'NORMAL',
     token: user?.token || '',
   });
 
@@ -61,17 +61,17 @@ export default function PlanTripPage() {
   };
 
   const typeOfGroup = [
-    { name: 'Couple', icon: heartIcon },
-    { name: 'Friends', icon: friendsIcon },
-    { name: 'Family', icon: familyIcon },
-    { name: 'Collegues', icon: colleguesIcon },
+    { name: 'Couple', icon: heartIcon, value:"COUPLE" },
+    { name: 'Friends', icon: friendsIcon, value: "FRIENDS" },
+    { name: 'Family', icon: familyIcon, value: "FAMILY" },
+    { name: 'Collegues', icon: colleguesIcon, value: "COMPANY" },
   ];
 
   const regimeAlimentaireList = [
-    { name: 'None', icon: plateIcon },
-    { name: 'Halal', icon: halalIcon },
-    { name: 'Vegan', icon: veganIcon },
-    { name: 'Vegetarian', icon: vegetarianIcon },
+    { name: 'None', icon: plateIcon, value: "NORMAL" },
+    { name: 'Halal', icon: halalIcon, value: "HALAL" },
+    { name: 'Vegan', icon: veganIcon, value: "VEGAN" },
+    { name: 'Vegetarian', icon: vegetarianIcon, value: "VEGETARIAN" },
   ];
 
   // Fonction de rappel pour recevoir le lieu sélectionné
@@ -105,7 +105,7 @@ export default function PlanTripPage() {
     setGroupSelected(index); // Met à jour l'état avec l'index du bouton cliqué
     setFormData(prevFormData => ({
       ...prevFormData, // On conserve toutes les autres propriétés de formData
-      typeGroup: typeOfGroup[index].name.toUpperCase(), // On met à jour seulement typeGroup
+      typeGroup: typeOfGroup[index].value.toUpperCase(), // On met à jour seulement typeGroup
     }));
   };
 
@@ -113,7 +113,7 @@ export default function PlanTripPage() {
     setDietSelected(index); // Met à jour l'état avec l'index du bouton cliqué
     setFormData(prevFormData => ({
       ...prevFormData, // On conserve toutes les autres propriétés de formData
-      regimeAlimentaire: regimeAlimentaireList[index].name.toUpperCase(), // On met à jour seulement typeGroup
+      regimeAlimentaire: regimeAlimentaireList[index].value.toUpperCase(), // On met à jour seulement typeGroup
     }));
   };
 
@@ -138,14 +138,50 @@ export default function PlanTripPage() {
   }, [counter]);
 
   async function handleSubmit(formData) {
-    console.log(user);
-    console.log("voici l 'itinéraire : ", formData);
-    const data = await createItineraryAction(formData);
-    if (data) {
-      setError('');
-      console.log('la data est ici : ', data.itinerary);
-      router.push(`/itinerary/${data.itinerary.id}`);
+    if(user){
+
+      if(user.sub){
+        const now = new Date();
+        const expirationDate = new Date(user.sub.expirationDate);
+
+        if (expirationDate < now) {
+          setError("Your subscription is expired")
+        } else {
+          try{
+            const data = await createItineraryAction(formData);
+            if (data.error) {
+              setError(data.error);
+            } else {
+              router.push(`/itinerary/${data.itinerary.id}`);
+            }
+          }
+          catch (error) {
+            setError("Failed to create the itinerary.");
+          }
+        }
+      }
+      else if (user.try === false){
+        try{
+          const data = await createItineraryAction(formData);
+          if (data.error) {
+            setError(data.error);
+          } else {
+            router.push(`/itinerary/${data.itinerary.id}`);
+          }
+        }
+        catch (error) {
+          console.error("Error creating itinerary:", error);
+          setError("Failed to create the itinerary.");
+        }
+      }
+      else {
+        setError("You currently don’t have any subscription.")
+      }
+    } 
+    else {
+      setError("You have to log in before creating an itinerary")
     }
+    
 
     // } else if (result.error) {
     //   setError(result.error);
@@ -178,70 +214,75 @@ export default function PlanTripPage() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="h-screen mt-16 flex justify-center">
-        <div className="w-[36%] min-w-[550px] p-8 space-y-12">
-          <h1 className="text-4xl text-center">Plan your next adventure</h1>
-          <TripFormDiv title={'Where do you want to go?'}>
-            <AutoComplete
-              autoCompleteOptions={options}
-              placeholderText={'Select a city'}
-              onPlaceSelected={handlePlaceSelected}
-              maxWidth={4500}
-              required={true}
-            />
-          </TripFormDiv>
-          <TripFormDiv title={'Select dates:'}>
-            <DateRangePicker onDateChange={handleDateChange} />
-          </TripFormDiv>
-          <TripFormDiv title={'Do you have any special diet?'}>
-            <SelectableButtons
-              itemList={regimeAlimentaireList}
-              handleGroupSelect={handleDietSelect}
-              groupSelected={dietSelected}
-            />
-          </TripFormDiv>
-          <TripFormDiv title={'How many people are going?'}>
-            <div className="flex h-13 w-auto py-3 px-4 border border-gray-300 rounded-md items-center justify-between shadow-sm">
-              <div className="flex items-center space-x-4">
-                <p className="w-10 py-1 bg-yellow-100 border border-yellow-300 rounded-md text-center">
-                  {counter}
-                </p>
-                {counter > 1 ? <p>Persons</p> : <p>Person</p>}
-              </div>
-              <div className="flex items-center space-x-4">
-                <Counter
-                  min={1}
-                  max={14}
-                  counter={counter}
-                  setCounter={setCounter}
-                />
-              </div>
-            </div>
-          </TripFormDiv>
-          {counter > 1 ? (
-            <TripFormDiv title={'Who are you traveling with?'}>
-              <SelectableButtons
-                itemList={typeOfGroup}
-                handleGroupSelect={handleGroupSelect}
-                groupSelected={groupSelected}
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 pt-16">
+        <div className="w-[36%] min-w-[550px] p-8 space-y-12 bg-white rounded-xl">
+          <h1 className="text-4xl text-center font-extrabold">Plan your next adventure</h1>
+          <form className="space-y-6" 
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(formData);
+          }}>
+            <TripFormDiv title={'Where do you want to go?'}>
+              <AutoComplete
+                autoCompleteOptions={options}
+                placeholderText={'Select a city'}
+                onPlaceSelected={handlePlaceSelected}
+                maxWidth={4500}
+                required={true}
               />
             </TripFormDiv>
-          ) : (
-            ''
-          )}
-          <div className="flex flex-col items-center justify-center">
-            {error ? <p className="text-red-500">{error}</p> : <></>}
-            <Button
-              buttonStyle="mt-14 rounded-full text-white bg-amber-600 hover:bg-amber-500"
-              padding="px-6 py-2"
-              onClick={() => handleSubmit(formData)}>
-              Create a new trip
-            </Button>
-            <p className="mt-5 text-gray-400 text-sm text-center">
-              By clicking Create New Trip, you agree to our Terms and Conditions
-              and Privacy Policy.
-            </p>
-          </div>
+            <TripFormDiv title={'Select dates:'}>
+              <DateRangePicker onDateChange={handleDateChange} />
+            </TripFormDiv>
+            <TripFormDiv title={'Do you have any special diet?'}>
+              <SelectableButtons
+                itemList={regimeAlimentaireList}
+                handleGroupSelect={handleDietSelect}
+                groupSelected={dietSelected}
+              />
+            </TripFormDiv>
+            <TripFormDiv title={'How many people are going?'}>
+              <div className="flex h-13 w-auto py-3 px-4 border border-gray-300 rounded-md items-center justify-between shadow-sm">
+                <div className="flex items-center space-x-4">
+                  <p className="w-10 py-1 bg-yellow-100 border border-yellow-300 rounded-md text-center">
+                    {counter}
+                  </p>
+                  {counter > 1 ? <p>Persons</p> : <p>Person</p>}
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Counter
+                    min={1}
+                    max={14}
+                    counter={counter}
+                    setCounter={setCounter}
+                  />
+                </div>
+              </div>
+            </TripFormDiv>
+            {counter > 1 ? (
+              <TripFormDiv title={'Who are you traveling with?'}>
+                <SelectableButtons
+                  itemList={typeOfGroup}
+                  handleGroupSelect={handleGroupSelect}
+                  groupSelected={groupSelected}
+                />
+              </TripFormDiv>
+            ) : (
+              ''
+            )}
+            <div className="flex flex-col items-center justify-center">
+              {error && <p className="text-red-500">{error}</p>}
+              <button
+                className="mt-14 rounded-full text-white bg-amber-600 hover:bg-amber-500 px-6 py-2"
+                type="submit">
+                Create a new trip
+              </button>
+              <p className="mt-5 text-sm text-center">
+                By clicking Create New Trip, you agree to our Terms and Conditions
+                and Privacy Policy.
+              </p>
+            </div>
+          </form>        
         </div>
       </div>
     </APIProvider>

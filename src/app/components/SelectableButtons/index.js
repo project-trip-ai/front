@@ -12,6 +12,7 @@ const SelectableButtons = ({
       {itemList.map((type, index) => (
         <Button
           key={index}
+          type="button"
           buttonStyle={`transition-colors duration-100 rounded-md shadow-sm active:bg-amber-300 active:border-amber-400 
                       ${
                         groupSelected === index
