@@ -38,7 +38,7 @@ export default function PlanTripPage() {
   const [formData, setFormData] = useState({
     destination: '',
     bgImg: '',
-    lng: '',
+    long: '',
     lat: '',
     shortName: '',
     nbPerson: counter,
@@ -46,7 +46,6 @@ export default function PlanTripPage() {
     endDate: endDate,
     typeGroup: 'SOLO',
     regimeAlimentaire: 'NONE',
-    userId: user?.id || '',
     token: user?.token || '',
   });
 
@@ -82,7 +81,7 @@ export default function PlanTripPage() {
       ...prevFormData, // On conserve toutes les autres propriétés de formData
       destination: place.name,
       bgImg: place.photoUrl,
-      lng: place.geometry.location.lng(),
+      long: place.geometry.location.lng(),
       lat: place.geometry.location.lat(),
       shortName:
         place.address_components[place.address_components.length - 1]
@@ -121,7 +120,6 @@ export default function PlanTripPage() {
   useEffect(() => {
     setFormData(prevFormData => ({
       ...prevFormData,
-      userId: user.id,
       token: user.token,
     }));
   }, [user]);
@@ -142,15 +140,17 @@ export default function PlanTripPage() {
   async function handleSubmit(formData) {
     console.log(user);
     console.log("voici l 'itinéraire : ", formData);
-    const result = await createItineraryAction(formData);
-    if (result.error) {
-      setError(result.error);
-      console.log("voici l'erreur : ", result.error);
-    } else if (result.success) {
+    const data = await createItineraryAction(formData);
+    if (data) {
       setError('');
-      console.log("bravo c'est créer !! : ", result);
-      // router.push('/account/profile');
+      console.log('la data est ici : ', data.itinerary);
+      router.push(`/itinerary/${data.itinerary.id}`);
     }
+
+    // } else if (result.error) {
+    //   setError(result.error);
+    //   console.log("voici l'erreur : ", result.error);
+    // }
 
     // try {
     //   const response = await fetch(
@@ -164,10 +164,12 @@ export default function PlanTripPage() {
     //     },
     //   );
     //   if (response.ok) {
+    //     setError('');
     //     const newItinerary = await response.json();
-    //     // router.push(`/itinerary/${newItinerary.id}`)
+    //     router.push(`/itinerary/${newItinerary.id}`);
     //   } else {
-    //     console.error('Failed to update user');
+    //     setError(response.error);
+    //     console.error('Failed to create a new trip : ', response);
     //   }
     // } catch (error) {
     //   console.error(error);

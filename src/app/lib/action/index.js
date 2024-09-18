@@ -79,13 +79,15 @@ export async function createItineraryAction(formData) {
   }
 
   try {
-    const itineraryData = { formData };
-    const data = await createItinerary(itineraryData);
+    // const itineraryData = { formData };
+    const data = await createItinerary(formData);
 
     if (data) {
-      return { success: true };
+      return data;
     } else {
-      return { error: 'We were not able to create a new trip: try again.' };
+      return {
+        error: 'We were not able to create a new trip: try again.',
+      };
     }
   } catch (error) {
     console.error('Trip creation failed: ', error);

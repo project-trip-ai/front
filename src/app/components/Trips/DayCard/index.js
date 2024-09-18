@@ -7,12 +7,12 @@ import Image from 'next/image';
 import Input from '../../Input';
 import AutoComplete from '../../AutoComplete';
 
-const DayCard = ({ day, month, ordinal }) => {
+const DayCard = ({ day, month, ordinal, shortName }) => {
   // State to manage whether the arrow is rotated and the ActivityCard is visible
   const [isOpen, setIsOpen] = useState(false);
 
   const options = {
-    componentRestrictions: { country: 'jp' },
+    componentRestrictions: { country: shortName },
     fields: [
       'geometry',
       'name',

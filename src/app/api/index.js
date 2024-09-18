@@ -119,23 +119,33 @@ export const updatePassword = async userData => {
 //Itinerary
 
 export const createItinerary = async itineraryData => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/createItinerary`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(itineraryData),
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/createItinerary`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
-    if (response.ok) {
-      const newItinerary = await response.json();
-    } else {
-      console.error('Failed to create new trip');
-    }
-  } catch (error) {
-    console.error(error);
+      body: JSON.stringify(itineraryData),
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed to create a new itinerary');
   }
+  const data = await response.json();
+  return data;
+};
+
+export const getItineraryById = async id => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/getItinerary/${id}`,
+    {
+      method: 'GET',
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed get itinerary');
+  }
+  const data = await response.json();
+  return data;
 };
