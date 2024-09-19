@@ -207,7 +207,7 @@ export default function PlanTripPage() {
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 pt-16">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 pt-16">
         <div className="w-[36%] min-w-[550px] p-8 space-y-12 bg-white rounded-xl">
           <h1 className="text-4xl text-center font-extrabold">
             Plan your next adventure

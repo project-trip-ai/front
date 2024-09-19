@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ActivityCard from '../ActivityCard';
-import AngleRight from '../../../../../public/icons/angle-right.svg';
+import AngleRight from '@/../../public/icons/angle-right.svg';
 import Image from 'next/image';
 import Input from '../../Input';
 import AutoComplete from '../../AutoComplete';

@@ -2,9 +2,9 @@
 import React from 'react';
 import axios from 'axios';
 import DealCard from '@/components/DealCard';
-import { subscriptions } from '../../data/data';
+import { subscriptions } from '@/data/data';
 import { loadStripe } from '@stripe/stripe-js';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,

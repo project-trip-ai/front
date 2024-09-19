@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getItineraryById } from '@/api';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import GMap from '@/components/GMap';
@@ -7,8 +7,9 @@ import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
 import Button from '@/components/Button';
 import DayCard from '@/components/Trips/DayCard';
-import ArrowLeft from '../../../../public/icons/arrow-left.svg';
-import ArrowRight from '../../../../public/icons/arrow-right.svg';
+
+import ArrowLeft from '@/../../public/icons/arrow-left.svg';
+import ArrowRight from '@/../../public/icons//arrow-right.svg';
 
 import {
   generateDateRangeObjects,
@@ -181,13 +182,15 @@ export default function ItineraryPage() {
                   {endDate}
                 </Button>
                 {itineraryData.nbPerson > 1 ? (
-                  <Button
-                    buttonStyle={
-                      'border border-gray-300 bg-white bg-opacity-20 rounded-full text-white'
-                    }
-                    padding="px-4 py-1">
-                    {itineraryData.nbPerson} People
-                  </Button>
+                  <>
+                    <Button
+                      buttonStyle={
+                        'border border-gray-300 bg-white bg-opacity-20 rounded-full text-white'
+                      }
+                      padding="px-4 py-1">
+                      {itineraryData.nbPerson} People
+                    </Button>
+                  </>
                 ) : (
                   <></>
                 )}

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Button from '../../Button';
 
-import TrashIcon from '../../../../../public/icons/trash.svg';
-import DotsIcon from '../../../../../public/icons/dots-vertical.svg';
-import MagicIcon from '../../../../../public/icons/magic.svg';
+import TrashIcon from '@/../../public/icons/trash.svg';
+import DotsIcon from '@/../../public/icons/dots-vertical.svg';
+import MagicIcon from '@/../../public/icons/magic.svg';
 
 const ActivityCard = ({
   image,

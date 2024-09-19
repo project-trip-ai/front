@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 import { getUserCookies } from '@/lib/auth';
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from '../../context/UserContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
