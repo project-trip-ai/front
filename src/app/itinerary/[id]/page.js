@@ -54,18 +54,12 @@ export default function ItineraryPage() {
     // Ajoute ce log pour vérifier l'état des activités avant le traitement
     console.log('Vérification des activités dans useEffect : ', activities);
 
-    if (
-      Array.isArray(activities) &&
-      activities.length > 0 &&
-      dateList.length > 0
-    ) {
+    if (Array.isArray(activities) && dateList.length > 0) {
       setDateList(addActivitiesToDateList(dateList, activities));
-
-      console.log('activities de base en sah :', activities),
-        console.log(
-          'La liste mise à jour :',
-          addActivitiesToDateList(dateList, activities),
-        );
+      console.log(
+        'La liste mise à jour :',
+        addActivitiesToDateList(dateList, activities),
+      );
     } else {
       console.log('Les données ne sont pas prêtes ou vides', activities);
     }

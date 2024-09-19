@@ -45,6 +45,7 @@ const DayCard = ({
   };
 
   const handleDelete = async (id, token) => {
+    console.log("là tu tentes de delete l'activity ", id);
     if (!user) {
       console.log("L'utilisateur est manquant.");
       setError('Unable to proceed: Place or user information missing.');
@@ -52,17 +53,22 @@ const DayCard = ({
     }
 
     try {
-      // Make the API call to delete the activity
+      // Appel API pour supprimer l'activité
       const data = await deleteActivity(id, token);
 
       if (data.error) {
         console.error('Erreur API : ', data.error);
       } else {
         console.log('Activité supprimée avec succès:', data);
-        // Filter out the deleted activity from activities
-        setActivities(prevActivities =>
-          prevActivities.filter(activity => activity.id !== id),
-        );
+        // Mettre à jour immédiatement l'état des activités
+        setActivities(prevActivities => {
+          const updatedActivities = prevActivities.filter(
+            activity => activity.id !== id,
+          );
+
+          // Forcer la mise à jour en créant une nouvelle référence d'objet
+          return [...updatedActivities];
+        });
       }
     } catch (err) {
       console.error("Erreur lors de la suppression de l'activité :", err);
