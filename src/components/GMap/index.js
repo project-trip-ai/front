@@ -20,6 +20,11 @@ const GMap = ({
 }) => {
   const [mapCenter, setMapCenter] = useState(position);
   const [placesList, setPlacesList] = useState([]);
+  const [isMounted, setIsMounted] = useState(false); // Flag pour savoir si le composant est monté
+
+  useEffect(() => {
+    setIsMounted(true); // Activer après le montage côté client
+  }, []);
 
   const handleMapClick = () => {
     setActiveMarker(null); // Fermer l'InfoWindow lorsque l'on clique sur la carte
@@ -37,16 +42,18 @@ const GMap = ({
       places[dayIndex] &&
       Array.isArray(places[dayIndex].activities)
     ) {
-      // Trouver l'activité correspondante
       const marker = places[dayIndex].activities.find(
         activity => activity.id === activeMarker,
       );
       if (marker) {
-        // Mettre à jour mapCenter avec les coordonnées de l'activité trouvée
         setMapCenter({ lat: marker.lat, lng: marker.long });
       }
     }
   }, [activeMarker, dayIndex, places]);
+
+  if (!isMounted) {
+    return null; // Ne pas rendre la carte jusqu'à ce que le composant soit monté
+  }
 
   return (
     <div className="h-full w-full">
@@ -78,11 +85,6 @@ const Markers = ({
   mapCenter,
 }) => {
   const map = useMap();
-
-  // useEffect(() => {
-  //   console.log('le marker actuel yes : ', activeMarker);
-  //   setMapCenter({ lat: position.lat, lng: position.long });
-  // }, [activeMarker]);
 
   useEffect(() => {
     if (!map) {
