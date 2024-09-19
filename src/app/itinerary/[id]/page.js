@@ -31,14 +31,6 @@ export default function ItineraryPage() {
   const [activities, setActivities] = useState([]);
   const [openDayCardIndex, setOpenDayCardIndex] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const buttonRef = useRef(null);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => setIsModalOpen(false);
 
   const handleSetActiveMarker = markerIndex => {
     setActiveMarker(markerIndex);
@@ -196,17 +188,9 @@ export default function ItineraryPage() {
                       buttonStyle={
                         'border border-gray-300 bg-white bg-opacity-20 rounded-full text-white'
                       }
-                      padding="px-4 py-1"
-                      onClick={openModal}>
+                      padding="px-4 py-1">
                       {itineraryData.nbPerson} People
                     </Button>
-                    <Modal isOpen={isModalOpen} onClose={closeModal}>
-                      <h2 className="text-xl mb-2">Contenu de la modal</h2>
-                      <p>
-                        Ceci est un exemple de modal simple ouverte sous le
-                        bouton.
-                      </p>
-                    </Modal>
                   </>
                 ) : (
                   <></>
