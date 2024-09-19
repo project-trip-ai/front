@@ -1,5 +1,10 @@
 'use server';
-import { loginUser, registerUser, createItinerary } from '@/app/api';
+import {
+  loginUser,
+  registerUser,
+  createItinerary,
+  createActivity,
+} from '@/app/api';
 import { setCookie, removeCookie } from '../auth';
 import { redirect } from 'next/navigation';
 
@@ -98,3 +103,27 @@ export async function createItineraryAction(formData) {
 }
 
 //activities
+
+export async function createActivityAction(formData) {
+  if (!formData.name) {
+    return { error: 'You have to select a destination' };
+  }
+
+  try {
+    // const itineraryData = { formData };
+    const data = await createItinerary(formData);
+
+    if (data) {
+      return data;
+    } else {
+      return {
+        error: 'We were not able to create a new activity: try again.',
+      };
+    }
+  } catch (error) {
+    console.error('Trip creation failed: ', error);
+    return {
+      error: 'Activity creation failed: ' + (error.message || String(error)),
+    };
+  }
+}

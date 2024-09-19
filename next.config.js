@@ -11,7 +11,7 @@ module.exports = {
         protocol: 'https',
         hostname: 'd21a74xarniucs.cloudfront.net',
         port: '',
-        pathname: '/itinerary/**',
+        pathname: '/**/**',
       },
     ],
   },

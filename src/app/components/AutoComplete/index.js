@@ -35,6 +35,7 @@ const AutoComplete = ({
         // Récupérer l'URL de la photo s'il y en a
         let photoUrl = null;
         if (place.photos && place.photos.length > 0) {
+          console.log('les photos : ', place.photos);
           photoUrl = place.photos[0].getUrl({ maxWidth: maxWidth }); // Récupère l'URL de la photo
         }
 
@@ -45,10 +46,11 @@ const AutoComplete = ({
         };
 
         setSelectedPlace(updatedPlace); // Met à jour l'état avec le lieu sélectionné et photoUrl
-
+        // console.log(updatedPlace);
         // Appeler la fonction de rappel si elle est définie pour informer le parent
         if (onPlaceSelected) {
-          onPlaceSelected(updatedPlace); // Passe le lieu sélectionné (avec photoUrl) au parent via le callback
+          onPlaceSelected(updatedPlace);
+          // Passe le lieu sélectionné (avec photoUrl) au parent via le callback
         }
 
         setPhotoUrl(photoUrl); // Met à jour l'état avec l'URL de la photo

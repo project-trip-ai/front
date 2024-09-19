@@ -1,16 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ActivityCard from '../ActivityCard';
 import AngleRight from '../../../../../public/icons/angle-right.svg';
 import Image from 'next/image';
 import Input from '../../Input';
 import AutoComplete from '../../AutoComplete';
+import { useUser } from '@/app/context/UserContext';
+import { createActivity } from '@/app/api';
 
-const DayCard = ({ day, month, ordinal, shortName }) => {
-  // State to manage whether the arrow is rotated and the ActivityCard is visible
-  const [isOpen, setIsOpen] = useState(false);
+const DayCard = ({
+  day,
+  month,
+  ordinal,
+  shortName,
+  activities,
+  date,
+  itineraryId,
+  onActivityCreated,
+  isOpen, // Reçoit l'état d'ouverture du parent
+  onToggle,
+}) => {
+  // const [isOpen, setIsOpen] = useState(false); // Toggle to show/hide activities
+  const [selectedPlace, setSelectedPlace] = useState(null); // Selected place from AutoComplete
+  const [error, setError] = useState(''); // For error messages
+  const [loading, setLoading] = useState(false); // Loading state
+  const { user } = useUser(); // User from context
 
+  // Options for Google Places Autocomplete
   const options = {
     componentRestrictions: { country: shortName },
     fields: [
@@ -21,21 +38,64 @@ const DayCard = ({ day, month, ordinal, shortName }) => {
       'international_phone_number',
       'formatted_address',
       'photos',
-      'types',
       'url',
-    ], // Champs récupérés
+    ], // Fields to retrieve from Google Places
   };
 
-  // Function to handle toggle click
-  const handleToggle = () => {
-    setIsOpen(!isOpen); // Toggle the state
+  // Callback when a place is selected
+  const handlePlaceSelected = async place => {
+    if (!place || !user) {
+      console.log("Le lieu ou l'utilisateur est manquant.");
+      setError('Unable to proceed: Place or user information missing.');
+      return;
+    }
+
+    // Logs to verify place data
+    console.log('Lieu sélectionné : ', place);
+
+    // Construct the activity data object
+    const activityData = {
+      name: place.name,
+      adresse: place.formatted_address,
+      date: date,
+      long: place.geometry.location.lng(),
+      lat: place.geometry.location.lat(),
+      rating: place.rating,
+      phoneNumber: place.international_phone_number,
+      priceLevel: place.price_level,
+      url: place.url,
+      itineraryId: itineraryId,
+      image: place.photoUrl, // Assuming photoUrl is correct
+      token: user?.token || '',
+    };
+
+    console.log("Données de l'activité : ", activityData);
+
+    setLoading(true); // Start loading
+
+    try {
+      // Make the API call to create an activity
+      const data = await createActivity(activityData);
+
+      if (data.error) {
+        setError(data.error);
+        console.error('Erreur API : ', data.error);
+      } else {
+        console.log('Activité créée avec succès:', data);
+        onActivityCreated(data.activity);
+      }
+    } catch (err) {
+      console.error("Erreur lors de la création de l'activité :", err);
+      setError('Failed to create activity');
+    } finally {
+      setLoading(false); // Stop loading
+    }
   };
 
   return (
-    <div>
+    <div className="px-12" onClick={onToggle}>
       {/* Clickable div to handle toggle */}
-      <div className="flex items-center cursor-pointer" onClick={handleToggle}>
-        {/* Rotate the arrow based on isOpen state using Tailwind */}
+      <div className="flex items-center cursor-pointer">
         <Image
           priority
           src={AngleRight}
@@ -47,17 +107,38 @@ const DayCard = ({ day, month, ordinal, shortName }) => {
         </p>
       </div>
 
-      <div className="h-[1px] w-full bg-gray-300 my-8"></div>
+      <div className="h-[1px] w-full bg-gray-300 my-10"></div>
 
       {/* Conditionally show the ActivityCard */}
       {isOpen && (
-        <div className="space-y-5 pb-10">
+        <div className="space-y-5 mb-16">
           <AutoComplete
             autoCompleteOptions={options}
             placeholderText={'Search for a place'}
+            onPlaceSelected={handlePlaceSelected}
           />
-          <ActivityCard />
-          <ActivityCard />
+          {/* Loading indicator */}
+          {loading && <p className="text-blue-500">Creating activity...</p>}
+          {/* Error message */}
+          {error && <p className="text-red-500">{error}</p>}
+
+          {activities.length > 0 ? (
+            <>
+              {activities.map((activity, index) => {
+                return (
+                  <ActivityCard
+                    name={activity.name}
+                    image={activity.image}
+                    key={index}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <div className="flex text-gray-400 w-full p-3 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200 hover:border-gray-300">
+              <p>You don't have plans for this day</p>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -149,3 +149,37 @@ export const getItineraryById = async id => {
   const data = await response.json();
   return data;
 };
+
+//activities
+export const createActivity = async activityData => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/createActivity`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(activityData),
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed to create a new activity');
+    console.log(response);
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const getActivitiesByItineraryId = async id => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/getActivities/${id}`,
+    {
+      method: 'GET',
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed get itinerary');
+  }
+  const data = await response.json();
+  return data;
+};

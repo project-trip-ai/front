@@ -10,17 +10,30 @@ import {
   useMap,
 } from '@vis.gl/react-google-maps';
 
-const GMap = ({ position = { lat: 53.54, lng: 10 } }) => {
+const GMap = ({ position = { lat: 53.54, lng: 10 }, dayIndex, places }) => {
   const positionList = [
     { lat: 53.54, lng: 10 },
     { lat: 53.74, lng: 10 },
   ];
   const [mapCenter, setMapCenter] = useState(position);
   const [activeMarker, setActiveMarker] = useState(null); // State to track the active marker
+  const [placesList, setPlacesList] = useState([]);
 
   const handleMapClick = () => {
     setActiveMarker(null); // Close the InfoWindow when clicking on the map
   };
+
+  useEffect(() => {
+    if (places[dayIndex]) {
+      setPlacesList(places[dayIndex].activities);
+      console.log(
+        'je vais prendre lat et long ici : ',
+        places[dayIndex].activities,
+      );
+    } else {
+      console.log('No activities found for the selected day index');
+    }
+  }, [dayIndex, places]);
 
   return (
     <div className="h-full w-full">
@@ -33,7 +46,7 @@ const GMap = ({ position = { lat: 53.54, lng: 10 } }) => {
         onLoad={map => console.log('Map Loaded:', map)} // Ensure map is loaded
       >
         <Markers
-          points={positionList}
+          points={placesList}
           setActiveMarker={setActiveMarker}
           setMapCenter={setMapCenter}
           activeMarker={activeMarker}
@@ -74,35 +87,41 @@ const Markers = ({
 
   return (
     <>
-      {points.map((point, index) => (
-        <div key={index}>
-          <AdvancedMarker
-            position={point}
-            onClick={() => handleMarkerClick(index, point)}>
-            <Pin
-              background={'#fceba4'}
-              borderColor={'orange'}
-              glyphColor={'orange'}></Pin>
-          </AdvancedMarker>
-          {/* Show InfoWindow only for the active marker */}
-          {activeMarker === index && (
-            <InfoWindow
-              position={point}
-              headerDisabled={true}
-              onCloseClick={() => setActiveMarker(null)} // Close the InfoWindow
-            >
-              <div className="flex space-x-4 py-1">
-                <div>
-                  <h1 className="font-medium text-lg">Tokyo Tower</h1>
-                  <p>Restaurant</p>
-                  <p>Description {index + 1}</p>
-                </div>
-                <div className="h-40 w-40 rounded-lg bg-gray-200"></div>
-              </div>
-            </InfoWindow>
-          )}
-        </div>
-      ))}
+      {points.length > 0 ? (
+        <>
+          {points.map((point, index) => (
+            <div key={index}>
+              <AdvancedMarker
+                position={{ lat: point.lat, lng: point.long }}
+                onClick={() => handleMarkerClick(index, point)}>
+                <Pin
+                  background={'#fceba4'}
+                  borderColor={'orange'}
+                  glyphColor={'orange'}></Pin>
+              </AdvancedMarker>
+              {/* Show InfoWindow only for the active marker */}
+              {activeMarker === index && (
+                <InfoWindow
+                  position={{ lat: point.lat, lng: point.long }}
+                  headerDisabled={true}
+                  onCloseClick={() => setActiveMarker(null)} // Close the InfoWindow
+                >
+                  <div className="flex space-x-4 py-1">
+                    <div>
+                      <h1 className="font-medium text-lg">Tokyo Tower</h1>
+                      <p>Restaurant</p>
+                      <p>Description {index + 1}</p>
+                    </div>
+                    <div className="h-40 w-40 rounded-lg bg-gray-200"></div>
+                  </div>
+                </InfoWindow>
+              )}
+            </div>
+          ))}
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
