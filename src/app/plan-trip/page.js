@@ -35,6 +35,7 @@ export default function PlanTripPage() {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     destination: '',
     bgImg: '',
@@ -136,6 +137,22 @@ export default function PlanTripPage() {
       nbPerson: counter, // On met à jour seulement typeGroup quand le counter tombe à 1
     }));
   }, [counter]);
+
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
+    } else {
+      window.location.reload();
+    }
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-16 h-16 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   async function handleSubmit(formData) {
     if (user) {
