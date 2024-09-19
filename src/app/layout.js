@@ -1,5 +1,5 @@
-import { Inter } from 'next/font/google';
 import './globals.css';
+import { Inter } from 'next/font/google';
 import Header from '@/components/Partials/Header';
 import Footer from '@/components/Partials/Footer';
 import { isUserLoggedIn, getUserCookies } from '@/lib/auth';
