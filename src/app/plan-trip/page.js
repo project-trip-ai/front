@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@/app/context/UserContext';
-import { createItineraryAction } from '@/app/lib/action';
+import { useUser } from '@/context/UserContext';
+import { createItineraryAction } from '@/lib/action';
 import Image from 'next/image';
 
-import AutoComplete from '../components/AutoComplete';
-import TripFormDiv from '../components/TripFormDiv';
-import Button from '../components/Button';
-import Counter from '../components/Counter';
-import DateRangePicker from '../components/DateRangePicker';
-import SelectableButtons from '../components/SelectableButtons';
+import AutoComplete from '../../components/AutoComplete';
+import TripFormDiv from '../../components/TripFormDiv';
+import Button from '../../components/Button';
+import Counter from '../../components/Counter';
+import DateRangePicker from '../../components/DateRangePicker';
+import SelectableButtons from '../../components/SelectableButtons';
 
 import heartIcon from '../../../public/icons/heart.svg';
 import friendsIcon from '../../../public/icons/friends.svg';
@@ -61,17 +61,17 @@ export default function PlanTripPage() {
   };
 
   const typeOfGroup = [
-    { name: 'Couple', icon: heartIcon, value:"COUPLE" },
-    { name: 'Friends', icon: friendsIcon, value: "FRIENDS" },
-    { name: 'Family', icon: familyIcon, value: "FAMILY" },
-    { name: 'Collegues', icon: colleguesIcon, value: "COMPANY" },
+    { name: 'Couple', icon: heartIcon, value: 'COUPLE' },
+    { name: 'Friends', icon: friendsIcon, value: 'FRIENDS' },
+    { name: 'Family', icon: familyIcon, value: 'FAMILY' },
+    { name: 'Collegues', icon: colleguesIcon, value: 'COMPANY' },
   ];
 
   const regimeAlimentaireList = [
-    { name: 'None', icon: plateIcon, value: "NORMAL" },
-    { name: 'Halal', icon: halalIcon, value: "HALAL" },
-    { name: 'Vegan', icon: veganIcon, value: "VEGAN" },
-    { name: 'Vegetarian', icon: vegetarianIcon, value: "VEGETARIAN" },
+    { name: 'None', icon: plateIcon, value: 'NORMAL' },
+    { name: 'Halal', icon: halalIcon, value: 'HALAL' },
+    { name: 'Vegan', icon: veganIcon, value: 'VEGAN' },
+    { name: 'Vegetarian', icon: vegetarianIcon, value: 'VEGETARIAN' },
   ];
 
   // Fonction de rappel pour recevoir le lieu sélectionné
@@ -138,50 +138,43 @@ export default function PlanTripPage() {
   }, [counter]);
 
   async function handleSubmit(formData) {
-    if(user){
-
-      if(user.sub){
+    if (user) {
+      if (user.sub) {
         const now = new Date();
         const expirationDate = new Date(user.sub.expirationDate);
 
         if (expirationDate < now) {
-          setError("Your subscription is expired")
+          setError('Your subscription is expired');
         } else {
-          try{
+          try {
             const data = await createItineraryAction(formData);
             if (data.error) {
               setError(data.error);
             } else {
               router.push(`/itinerary/${data.itinerary.id}`);
             }
-          }
-          catch (error) {
-            setError("Failed to create the itinerary.");
+          } catch (error) {
+            setError('Failed to create the itinerary.');
           }
         }
-      }
-      else if (user.try === false){
-        try{
+      } else if (user.try === false) {
+        try {
           const data = await createItineraryAction(formData);
           if (data.error) {
             setError(data.error);
           } else {
             router.push(`/itinerary/${data.itinerary.id}`);
           }
+        } catch (error) {
+          console.error('Error creating itinerary:', error);
+          setError('Failed to create the itinerary.');
         }
-        catch (error) {
-          console.error("Error creating itinerary:", error);
-          setError("Failed to create the itinerary.");
-        }
+      } else {
+        setError('You currently don’t have any subscription.');
       }
-      else {
-        setError("You currently don’t have any subscription.")
-      }
-    } 
-    else {
-      setError("You have to log in before creating an itinerary")
+    } else {
+      setError('You have to log in before creating an itinerary');
     }
-    
 
     // } else if (result.error) {
     //   setError(result.error);
@@ -216,12 +209,15 @@ export default function PlanTripPage() {
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 pt-16">
         <div className="w-[36%] min-w-[550px] p-8 space-y-12 bg-white rounded-xl">
-          <h1 className="text-4xl text-center font-extrabold">Plan your next adventure</h1>
-          <form className="space-y-6" 
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(formData);
-          }}>
+          <h1 className="text-4xl text-center font-extrabold">
+            Plan your next adventure
+          </h1>
+          <form
+            className="space-y-6"
+            onSubmit={e => {
+              e.preventDefault();
+              handleSubmit(formData);
+            }}>
             <TripFormDiv title={'Where do you want to go?'}>
               <AutoComplete
                 autoCompleteOptions={options}
@@ -278,11 +274,11 @@ export default function PlanTripPage() {
                 Create a new trip
               </button>
               <p className="mt-5 text-sm text-center">
-                By clicking Create New Trip, you agree to our Terms and Conditions
-                and Privacy Policy.
+                By clicking Create New Trip, you agree to our Terms and
+                Conditions and Privacy Policy.
               </p>
             </div>
-          </form>        
+          </form>
         </div>
       </div>
     </APIProvider>

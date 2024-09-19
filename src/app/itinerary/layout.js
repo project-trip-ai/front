@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { getUserCookies } from '@/app/lib/auth';
+import { getUserCookies } from '@/lib/auth';
 import { UserProvider } from './context/UserContext';
 const inter = Inter({ subsets: ['latin'] });
 
