@@ -32,7 +32,11 @@ const GMap = ({
   }, [dayIndex, places]);
 
   useEffect(() => {
-    if (activeMarker !== null && places[dayIndex]) {
+    if (
+      activeMarker !== null &&
+      places[dayIndex] &&
+      Array.isArray(places[dayIndex].activities)
+    ) {
       // Trouver l'activité correspondante
       const marker = places[dayIndex].activities.find(
         activity => activity.id === activeMarker,
@@ -129,14 +133,18 @@ const Markers = ({
                     </div>
                     <div className="h-[230px] w-[230px] rounded-lg bg-gray-200">
                       <div className="w-[230px] h-[230px] relative overflow-hidden rounded-lg shadow-sm cursor-pointer">
-                        <Image
-                          priority
-                          src={point.image}
-                          layout="fill"
-                          objectFit="cover"
-                          alt={point.name}
-                          onClick={() => window.open(point.url)}
-                        />
+                        {point.image ? (
+                          <Image
+                            priority
+                            src={point.image}
+                            layout="fill"
+                            objectFit="cover"
+                            alt={point.name}
+                            onClick={() => window.open(point.url)}
+                          />
+                        ) : (
+                          <div className="w-full h-full rounded-lg bg-gray-300 shadow-sm"></div>
+                        )}
                       </div>
                     </div>
                   </div>

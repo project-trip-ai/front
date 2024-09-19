@@ -20,14 +20,19 @@ const ActivityCard = ({
         className="flex w-full p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 hover:border-gray-300"
         onMouseOver={onHover}>
         {/* <div className="w-[70px] h-[70px] rounded-lg bg-gray-300 shadow-sm"></div> */}
-        <Image
-          priority
-          src={image}
-          height={70}
-          width={70}
-          className="rounded-lg shadow-sm"
-          alt={name}
-        />
+        {image ? (
+          <Image
+            priority
+            src={image}
+            height={70}
+            width={70}
+            className="rounded-lg shadow-sm"
+            alt={name}
+          />
+        ) : (
+          <div className="w-[70px] h-[70px] rounded-lg bg-gray-300 shadow-sm"></div>
+        )}
+
         <div className="ml-3">
           <p>{name}</p>
           <div className="flex mt-2 items-center">
