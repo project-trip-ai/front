@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import DealCard from '@/components/DealCard';
-import { subscriptions } from '../data/data';
+import { subscriptions } from '../../data/data';
 import { loadStripe } from '@stripe/stripe-js';
 import { useUser } from '../../context/UserContext';
 import { useRouter } from 'next/navigation';

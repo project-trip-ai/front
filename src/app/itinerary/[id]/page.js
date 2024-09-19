@@ -5,10 +5,8 @@ import { APIProvider } from '@vis.gl/react-google-maps';
 import GMap from '@/components/GMap';
 import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
-
 import Button from '@/components/Button';
 import DayCard from '@/components/Trips/DayCard';
-
 import ArrowLeft from '../../../../public/icons/arrow-left.svg';
 import ArrowRight from '../../../../public/icons/arrow-right.svg';
 
