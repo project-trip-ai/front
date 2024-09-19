@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-
 export default function Contact() {
   const [formData, setFormData] = useState({
     email: '',
