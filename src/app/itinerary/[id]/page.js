@@ -122,7 +122,7 @@ export default function ItineraryPage() {
   }
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="min-h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 pt-16">
+      <div className="min-h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 ">
         <div className="relative w-full h-screen bg-white no-scrollbar overflow-y-scroll overflow-x-clip">
           <div className="z-20 w-full flex sticky top-0 py-2 px-10  justify-between bg-white bg-opacity-80 backdrop-blur-sm">
             <Button

@@ -1,5 +1,13 @@
+'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 const Footer = () => {
+  const pathname = usePathname();
+  if (pathname.startsWith('/itinerary')) {
+    return null;
+  }
+
   return (
     <div className="bg-gray-800">
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between ">

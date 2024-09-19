@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { logout } from '@/lib/action';
+import { usePathname } from 'next/navigation';
 const ChicHeader = ({ isLoggedIn }) => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const pathname = usePathname();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -40,6 +43,9 @@ const ChicHeader = ({ isLoggedIn }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  if (pathname.startsWith('/itinerary')) {
+    return null;
+  }
 
   return (
     <header
@@ -47,7 +53,8 @@ const ChicHeader = ({ isLoggedIn }) => {
         isScrolled
           ? 'fixed top-0 left-0 bg-gray-800 bg-opacity-50'
           : 'absolute top-0 left-0 bg-transparent'
-      }`}>
+      }
+    `}>
       <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
         <Link
           href="/"

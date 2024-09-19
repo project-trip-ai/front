@@ -85,6 +85,8 @@ export default function ProfilePage() {
     );
   }
 
+  console.log(user, 'userr');
+
   return (
     <>
       {user ? (
