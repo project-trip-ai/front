@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getItineraryById } from '@/app/api';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import GMap from '@/app/components/GMap';
@@ -17,6 +17,7 @@ import {
   groupActivitiesByDate,
   addActivitiesToDateList,
 } from '@/app/lib/dates';
+import Modal from '@/app/components/Modal';
 
 export default function ItineraryPage() {
   const router = useRouter();
@@ -31,6 +32,14 @@ export default function ItineraryPage() {
   const [activities, setActivities] = useState([]);
   const [openDayCardIndex, setOpenDayCardIndex] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const buttonRef = useRef(null);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
 
   const handleSetActiveMarker = markerIndex => {
     setActiveMarker(markerIndex);
@@ -183,13 +192,23 @@ export default function ItineraryPage() {
                   {endDate}
                 </Button>
                 {itineraryData.nbPerson > 1 ? (
-                  <Button
-                    buttonStyle={
-                      'border border-gray-300 bg-white bg-opacity-20 rounded-full text-white'
-                    }
-                    padding="px-4 py-1">
-                    {itineraryData.nbPerson} People
-                  </Button>
+                  <>
+                    <Button
+                      buttonStyle={
+                        'border border-gray-300 bg-white bg-opacity-20 rounded-full text-white'
+                      }
+                      padding="px-4 py-1"
+                      onClick={openModal}>
+                      {itineraryData.nbPerson} People
+                    </Button>
+                    <Modal isOpen={isModalOpen} onClose={closeModal}>
+                      <h2 className="text-xl mb-2">Contenu de la modal</h2>
+                      <p>
+                        Ceci est un exemple de modal simple ouverte sous le
+                        bouton.
+                      </p>
+                    </Modal>
+                  </>
                 ) : (
                   <></>
                 )}
