@@ -2,12 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { getItineraryById } from '@/app/api';
 import { APIProvider } from '@vis.gl/react-google-maps';
-import GMap from '@/app/components/GMap';
+import GMap from '@/components/GMap';
 import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
 
-import Button from '@/app/components/Button';
-import DayCard from '@/app/components/Trips/DayCard';
+import Button from '@/components/Button';
+import DayCard from '@/components/Trips/DayCard';
 
 import ArrowLeft from '../../../../public/icons/arrow-left.svg';
 import ArrowRight from '../../../../public/icons/arrow-right.svg';
@@ -16,8 +16,7 @@ import {
   generateDateRangeObjects,
   groupActivitiesByDate,
   addActivitiesToDateList,
-} from '@/app/lib/dates';
-import Modal from '@/app/components/Modal';
+} from '@/lib/dates';
 
 export default function ItineraryPage() {
   const router = useRouter();

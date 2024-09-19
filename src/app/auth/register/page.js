@@ -1,9 +1,9 @@
-import RegisterForm from "@/app/components/RegisterForm";
-import Link from "next/link";
+import RegisterForm from '@/components/RegisterForm';
+import Link from 'next/link';
 
 export const metadata = {
-  title: "Register | Your App Name",
-  description: "Create a new account",
+  title: 'Register | Your App Name',
+  description: 'Create a new account',
 };
 
 export default function RegisterPage() {

@@ -4,7 +4,7 @@ import {
   registerUser,
   createItinerary,
   createActivity,
-} from '@/app/api';
+} from '@/api';
 import { setCookie, removeCookie } from '../auth';
 import { redirect } from 'next/navigation';
 

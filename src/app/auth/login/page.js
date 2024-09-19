@@ -1,9 +1,9 @@
-import LoginForm from "@/app/components/LoginForm";
-import Link from "next/link";
+import LoginForm from '@/components/LoginForm';
+import Link from 'next/link';
 
 export const metadata = {
-  title: "Login | Your App Name",
-  description: "Login to access your account",
+  title: 'Login | Your App Name',
+  description: 'Login to access your account',
 };
 
 export default function LoginPage() {

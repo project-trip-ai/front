@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@/app/context/UserContext';
-import { createItineraryAction } from '@/app/lib/action';
+import { useUser } from '@/context/UserContext';
+import { createItineraryAction } from '@/lib/action';
 import Image from 'next/image';
 
-import AutoComplete from '../components/AutoComplete';
-import TripFormDiv from '../components/TripFormDiv';
-import Button from '../components/Button';
-import Counter from '../components/Counter';
-import DateRangePicker from '../components/DateRangePicker';
-import SelectableButtons from '../components/SelectableButtons';
+import AutoComplete from '../../components/AutoComplete';
+import TripFormDiv from '../../components/TripFormDiv';
+import Button from '../../components/Button';
+import Counter from '../../components/Counter';
+import DateRangePicker from '../../components/DateRangePicker';
+import SelectableButtons from '../../components/SelectableButtons';
 
 import heartIcon from '../../../public/icons/heart.svg';
 import friendsIcon from '../../../public/icons/friends.svg';

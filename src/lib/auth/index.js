@@ -1,31 +1,31 @@
-import { cookies } from "next/headers";
-import { getUser } from "@/app/api";
-export const setCookie = async (token) => {
+import { cookies } from 'next/headers';
+import { getUser } from '@/api';
+export const setCookie = async token => {
   const cookieStore = cookies();
   await cookieStore.set({
-    name: "token",
+    name: 'token',
     value: token,
-    path: "/",
+    path: '/',
     httpOnly: true,
     domain:
-      `${process.env.NODE_ENV === "production"}` === "true"
+      `${process.env.NODE_ENV === 'production'}` === 'true'
         ? process.env.FRONTEND_URL
-        : "localhost",
+        : 'localhost',
     maxAge: 24 * 60 * 60,
-    sameSite: "strict",
+    sameSite: 'strict',
     secure:
-      `${process.env.NODE_ENV === "production"}` === "true" ? true : false,
+      `${process.env.NODE_ENV === 'production'}` === 'true' ? true : false,
   });
 };
 
 export const removeCookie = async () => {
   const cookieStore = cookies();
-  cookieStore.delete("token");
+  cookieStore.delete('token');
 };
 
 export async function isUserLoggedIn() {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get('token');
   try {
     const userData = await getUser(token.value);
     return true;
@@ -36,7 +36,7 @@ export async function isUserLoggedIn() {
 
 export async function getUserCookies() {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get('token');
   try {
     const userData = await getUser(token.value);
     return userData;
@@ -44,4 +44,3 @@ export async function getUserCookies() {
     return false;
   }
 }
-

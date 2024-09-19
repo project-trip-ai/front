@@ -6,8 +6,8 @@ import AngleRight from '../../../../../public/icons/angle-right.svg';
 import Image from 'next/image';
 import Input from '../../Input';
 import AutoComplete from '../../AutoComplete';
-import { useUser } from '@/app/context/UserContext';
-import { createActivity, deleteActivity } from '@/app/api';
+import { useUser } from '@/context/UserContext';
+import { createActivity, deleteActivity } from '@/api';
 
 const DayCard = ({
   day,
