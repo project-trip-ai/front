@@ -30,6 +30,11 @@ export default function ItineraryPage() {
   const [dateList, setDateList] = useState([]);
   const [activities, setActivities] = useState([]);
   const [openDayCardIndex, setOpenDayCardIndex] = useState(null);
+  const [activeMarker, setActiveMarker] = useState(null);
+
+  const handleSetActiveMarker = markerIndex => {
+    setActiveMarker(markerIndex);
+  };
 
   // Define options for the desired format
   const options = { day: 'numeric', month: 'short', year: '2-digit' };
@@ -43,6 +48,7 @@ export default function ItineraryPage() {
   // Ajoute la nouvelle activité à la liste des activités
   const handleNewActivity = newActivity => {
     setActivities(prevActivities => [...prevActivities, newActivity]); // Add the new activity
+    setActiveMarker(newActivity.id);
   };
 
   useEffect(() => {
@@ -205,6 +211,8 @@ export default function ItineraryPage() {
                   isOpen={openDayCardIndex === index}
                   onToggle={() => handleToggleDayCard(index)} // Passer la fonction de toggle
                   onActivityCreated={handleNewActivity} // Passer le callback pour les nouvelles activités
+                  setActiveMarker={setActiveMarker}
+                  setActivities={setActivities}
                 />
               );
             })}
@@ -216,6 +224,8 @@ export default function ItineraryPage() {
             position={position}
             dayIndex={openDayCardIndex}
             places={dateList}
+            activeMarker={activeMarker}
+            setActiveMarker={handleSetActiveMarker}
           />
         </div>
       </div>

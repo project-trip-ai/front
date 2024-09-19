@@ -183,3 +183,21 @@ export const getActivitiesByItineraryId = async id => {
   const data = await response.json();
   return data;
 };
+
+export const deleteActivity = async (id, userToken) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/deleteActivity/${id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: userToken }),
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed to delete activity');
+  }
+  const data = await response.json();
+  return data;
+};

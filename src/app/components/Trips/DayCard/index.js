@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Input from '../../Input';
 import AutoComplete from '../../AutoComplete';
 import { useUser } from '@/app/context/UserContext';
-import { createActivity } from '@/app/api';
+import { createActivity, deleteActivity } from '@/app/api';
 
 const DayCard = ({
   day,
@@ -18,8 +18,10 @@ const DayCard = ({
   date,
   itineraryId,
   onActivityCreated,
+  setActiveMarker,
   isOpen, // Reçoit l'état d'ouverture du parent
   onToggle,
+  setActivities,
 }) => {
   // const [isOpen, setIsOpen] = useState(false); // Toggle to show/hide activities
   const [selectedPlace, setSelectedPlace] = useState(null); // Selected place from AutoComplete
@@ -40,6 +42,31 @@ const DayCard = ({
       'photos',
       'url',
     ], // Fields to retrieve from Google Places
+  };
+
+  const handleDelete = async (id, token) => {
+    if (!user) {
+      console.log("L'utilisateur est manquant.");
+      setError('Unable to proceed: Place or user information missing.');
+      return;
+    }
+
+    try {
+      // Make the API call to delete the activity
+      const data = await deleteActivity(id, token);
+
+      if (data.error) {
+        console.error('Erreur API : ', data.error);
+      } else {
+        console.log('Activité supprimée avec succès:', data);
+        // Filter out the deleted activity from activities
+        setActivities(prevActivities =>
+          prevActivities.filter(activity => activity.id !== id),
+        );
+      }
+    } catch (err) {
+      console.error("Erreur lors de la suppression de l'activité :", err);
+    }
   };
 
   // Callback when a place is selected
@@ -93,9 +120,9 @@ const DayCard = ({
   };
 
   return (
-    <div className="px-12" onClick={onToggle}>
+    <div className="px-12">
       {/* Clickable div to handle toggle */}
-      <div className="flex items-center cursor-pointer">
+      <div className="flex items-center cursor-pointer " onClick={onToggle}>
         <Image
           priority
           src={AngleRight}
@@ -122,7 +149,7 @@ const DayCard = ({
           {/* Error message */}
           {error && <p className="text-red-500">{error}</p>}
 
-          {activities.length > 0 ? (
+          {activities && activities.length > 0 ? (
             <>
               {activities.map((activity, index) => {
                 return (
@@ -130,6 +157,8 @@ const DayCard = ({
                     name={activity.name}
                     image={activity.image}
                     key={index}
+                    onHover={() => setActiveMarker(activity.id)}
+                    handleDelete={() => handleDelete(activity.id, user.token)}
                   />
                 );
               })}
