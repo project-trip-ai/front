@@ -141,10 +141,11 @@ export default function PlanTripPage() {
   useEffect(() => {
     if (user) {
       setLoading(false);
+      console.log("l'état du user : ", user);
     } else {
-      window.location.reload();
+      router.push('/auth/login');
     }
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (

@@ -4,7 +4,7 @@ import axios from 'axios';
 import DealCard from '@/components/DealCard';
 import { subscriptions } from '@/data/data';
 import { loadStripe } from '@stripe/stripe-js';
-import { useUser } from '@/context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useRouter } from 'next/navigation';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
@@ -26,11 +26,10 @@ export default function SubscriptionPage() {
       };
 
       const secretCode = product.code;
-      const emailUser = user.email;
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_CHECKOUT, { 
-          lineItems: [lineItem],
-          secretCode, 
-          emailUser,
+
+      const { data } = await axios.post(process.env.NEXT_PUBLIC_CHECKOUT, {
+        lineItems: [lineItem],
+        secretCode,
       });
 
       const stripe = await stripePromise;
