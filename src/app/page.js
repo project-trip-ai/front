@@ -13,13 +13,13 @@ export default function Home() {
         const data = await getRecentItineraries();
         setItineraries(data);
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error('Error fetching user:', error);
       }
     };
-  
+
     fetchItineraryData();
   }, []);
-  
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-[url('https://img.freepik.com/photos-gratuite/scene-voyage-couleurs-pastel-atmosphere-reve_23-2151450706.jpg?t=st=1726791168~exp=1726794768~hmac=0b4e3a605c83b23f74e06de341a4a1e2e227fda338c105ea3fa6b30f5ffdae7a&w=1480')] bg-cover">
@@ -41,7 +41,7 @@ export default function Home() {
             </a>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img src="/hero.png" alt="banner"></img>
+            {/* <img src="/hero.png" alt="banner"></img> */}
           </div>
         </div>
       </div>
@@ -115,9 +115,9 @@ export default function Home() {
             </h2>
             <p className="mb-6 font-light md:text-lg text-white">
               Let us know what you'd like to do with your free time, from
-              activities to dining preferences. Based on
-              your choice, we’ll provide a personalized list of suggestions to
-              make your trip truly unforgettable.
+              activities to dining preferences. Based on your choice, we’ll
+              provide a personalized list of suggestions to make your trip truly
+              unforgettable.
             </p>
           </div>
         </div>
@@ -173,16 +173,15 @@ export default function Home() {
             </p>
           </div>
           <div className="">
-          {itineraries && itineraries.length > 0 ? (
+            {itineraries && itineraries.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 {itineraries.map(itinerary => (
                   <TripCard key={itinerary.id} trip={itinerary} />
                 ))}
               </div>
-               ) : (
-                ''
-              )}
- 
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </section>

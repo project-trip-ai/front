@@ -97,15 +97,15 @@ export default function ProfilePage() {
       {user && (
         <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-white rounded-lg p-4">
-            <div className="border-4 border-blue-200 pb-8 mb-8 bg-white bg-gradient-to-br from-blue-800 to-sky-200 rounded-lg p-4 flex flex-col items-center justify-center h-full">
-              <h1 className="text-3xl font-semibold text-white mb-2">
+            <div className="border-4 border-gray-200 pb-8 mb-8 bg-white bg-gradient-to-br from-gray-200 to-gray-100 rounded-lg p-4 flex flex-col items-center justify-center h-full">
+              <h1 className="text-3xl font-semibold mb-2">
                 🌟 {user.firstname} {user.lastname} 🌟
               </h1>
-              <p className="text-sm text-white">{user.email}</p>
+              <p className="text-sm">{user.email}</p>
               <div className="flex mt-4 space-x-4 ">
                 <Button
                   onClick={openModal}
-                  buttonStyle="space-x-1 text-blue-800 bg-white bg-opacity-70 rounded-lg hover:bg-opacity-80 active:bg-opacity-60 transition-all">
+                  buttonStyle="space-x-1 text-gray-800 bg-white rounded-lg hover:bg-gray-300 active:bg-gray-400 active:text-white transition-all">
                   <p>Edit Profile</p>
                   <Image
                     priority
@@ -121,7 +121,7 @@ export default function ProfilePage() {
                       `/auth/resetPassword?email=${user.email}&token=${user.token}`,
                     )
                   }
-                  buttonStyle="text-blue-800 bg-white bg-opacity-70 rounded-lg hover:bg-opacity-80 active:bg-opacity-60 transition-all">
+                  buttonStyle="text-gray-800 bg-white rounded-lg hover:bg-gray-300 active:bg-gray-400 active:text-white transition-all">
                   Change Password
                 </Button>
               </div>
