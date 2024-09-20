@@ -79,7 +79,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <section className="bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 py-20">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
             <p className="mb-4 text-3xl tracking-tight font-bold text-white md:text-4xl">
@@ -162,7 +162,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <section className="bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 py-20">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
             <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-white">
@@ -245,7 +245,7 @@ export default function Home() {
         </div>
       </section>
       <section className="bg-white px-4 py-8 antialiased md:py-16">
-        <div className="mx-auto grid max-w-screen-xl rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4 md:p-8 lg:grid-cols-12 lg:gap-8 lg:p-16 xl:gap-16">
+        <div className="mx-auto grid max-w-screen-xl rounded-lg bg-gradient-to-br bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 py-20 py-20 p-4 md:p-8 lg:grid-cols-12 lg:gap-8 lg:p-16 xl:gap-16">
           <div className="lg:col-span-8 lg:mt-0">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="grid gap-4">
