@@ -26,10 +26,11 @@ export default function SubscriptionPage() {
       };
 
       const secretCode = product.code;
-
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_CHECKOUT, {
-        lineItems: [lineItem],
-        secretCode,
+      const emailUser = user.email;
+      const { data } = await axios.post(process.env.NEXT_PUBLIC_CHECKOUT, { 
+          lineItems: [lineItem],
+          secretCode, 
+          emailUser,
       });
 
       const stripe = await stripePromise;
