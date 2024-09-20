@@ -13,7 +13,7 @@ const TripCard = ({ trip }) => {
     <Link
       className="rounded-2xl overflow-hidden transition-shadow duration-300"
       href={`/itinerary/${trip.id}`}>
-      <div className="relative h-72 border-4 border-BLUE-100 rounded-2xl">
+      <div className="relative h-72 border-4 border-gray-200 rounded-2xl">
         <div className="rounded-xl  h-full w-full overflow-hidden">
           <img
             src={trip.bgImg}

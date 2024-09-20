@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500">
+      <div className="min-h-screen flex items-center justify-center bg-[url('https://img.freepik.com/photos-gratuite/scene-voyage-couleurs-pastel-atmosphere-reve_23-2151450706.jpg?t=st=1726791168~exp=1726794768~hmac=0b4e3a605c83b23f74e06de341a4a1e2e227fda338c105ea3fa6b30f5ffdae7a&w=1480')] bg-cover">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">

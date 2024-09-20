@@ -96,7 +96,7 @@ export default function ProfilePage() {
     <>
       {user && (
         <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto bg-white rounded-lg p-4">
             <div className="border-4 border-blue-200 pb-8 mb-8 bg-white bg-gradient-to-br from-blue-800 to-sky-200 rounded-lg p-4 flex flex-col items-center justify-center h-full">
               <h1 className="text-3xl font-semibold text-white mb-2">
                 🌟 {user.firstname} {user.lastname} 🌟

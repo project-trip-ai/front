@@ -165,25 +165,31 @@ export default function PlanTripPage() {
           setError('Your subscription is expired');
         } else {
           try {
+            setLoading(true);
             const data = await createItineraryAction(formData);
             if (data.error) {
               setError(data.error);
             } else {
+              setLoading(false);
               router.push(`/itinerary/${data.itinerary.id}`);
             }
           } catch (error) {
+            setLoading(false);
             setError('Failed to create the itinerary.');
           }
         }
       } else if (user.try === false) {
         try {
+          setLoading(true);
           const data = await createItineraryAction(formData);
           if (data.error) {
             setError(data.error);
           } else {
+            setLoading(false);
             router.push(`/itinerary/${data.itinerary.id}`);
           }
         } catch (error) {
+          setLoading(false);
           console.error('Error creating itinerary:', error);
           setError('Failed to create the itinerary.');
         }
@@ -193,34 +199,6 @@ export default function PlanTripPage() {
     } else {
       setError('You have to log in before creating an itinerary');
     }
-
-    // } else if (result.error) {
-    //   setError(result.error);
-    //   console.log("voici l'erreur : ", result.error);
-    // }
-
-    // try {
-    //   const response = await fetch(
-    //     `${process.env.NEXT_PUBLIC_BASE_URL}/createItinerary`,
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(formData),
-    //     },
-    //   );
-    //   if (response.ok) {
-    //     setError('');
-    //     const newItinerary = await response.json();
-    //     router.push(`/itinerary/${newItinerary.id}`);
-    //   } else {
-    //     setError(response.error);
-    //     console.error('Failed to create a new trip : ', response);
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
   }
 
   return (
