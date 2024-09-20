@@ -95,7 +95,7 @@ export default function ProfilePage() {
   return (
     <>
       {user && (
-        <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-400 to-gray-100">
           <div className="max-w-4xl mx-auto">
             <div className="border-4 border-blue-200 pb-8 mb-8 bg-white bg-gradient-to-br from-blue-800 to-sky-200 rounded-lg p-4 flex flex-col items-center justify-center h-full">
               <h1 className="text-3xl font-semibold text-white mb-2">
@@ -131,43 +131,54 @@ export default function ProfilePage() {
               <h2 className="text-[30px] font-medium text-gray-900 mb-4 uppercase">
                 My Trips
               </h2>
+              {user.itineraties && user.itineraties.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 {user.itineraties.map(itinerary => (
                   <TripCard key={itinerary.id} trip={itinerary} />
                 ))}
               </div>
+               ) : (
+                <div className="text-sm text-gray-900 ">
+                  You currently don't have any trips.{' '}
+                  <Link
+                    href="/plan-trip"
+                    className="text-blue-600 hover:underline">
+                    Would you like to create a new trip?
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="border-t border-gray-200 pt-8">
-              <h2 className="text-[30px] font-light text-gray-900 mb-4">
+              <h2 className="text-[30px] font-medium text-gray-900 mb-4 uppercase">
                 Subscription Details
               </h2>
               {user.sub ? (
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-500">Status</span>
+                    <span className="text-gray-900">Status</span>
                     <span
-                      className={
-                        status === 'ACTIVE' ? 'text-green-600' : 'text-red-600'
-                      }>
+                      className={`px-4 py-2 font-semibold rounded-md text-white ${
+                        status === 'ACTIVE' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
+                      }`}>
                       {status}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-500">Subscription Date</span>
+                    <span className="text-gray-900">Subscription Date</span>
                     <span>
                       {new Date(user.sub.subscriptionDate).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-500">Expiration Date</span>
+                    <span className="text-gray-900">Expiration Date</span>
                     <span>
                       {new Date(user.sub.expirationDate).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
               ) : (
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-900 ">
                   You currently don't have any subscription.{' '}
                   <Link
                     href="/subscription"

@@ -37,12 +37,12 @@ export default function Home() {
         <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <div className="grid grid-cols-2 gap-4 mt-8">
             <img
-              className="w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
+              className="w-full rounded-3xl"
+              src="/homepage/images/img5.png"
               alt="office content 1"></img>
             <img
-              className="mt-4 w-full lg:mt-10 rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
+              className="mt-4 w-full lg:mt-10 rounded-3xl"
+              src="/homepage/images/img6.png"
               alt="office content 2"></img>
           </div>
           <div className="mt-4 md:mt-0">
@@ -81,14 +81,14 @@ export default function Home() {
             </p>
           </div>
           <img
-            className="w-full rounded-xl"
+            className="w-full rounded-3xl"
             src="/homepage/images/img1.png"
             alt="dashboard image"></img>
         </div>
         <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <img
-            className="w-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
+            className="w-full rounded-3xl"
+            src="/homepage/images/img2.png"
             alt="dashboard image"></img>
           <div className="mt-4 md:mt-0">
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-white">
@@ -96,8 +96,8 @@ export default function Home() {
             </h2>
             <p className="mb-6 font-light md:text-lg text-white">
               Let us know what you'd like to do with your free time, from
-              activities to dining preferences - vegetarian or not. Based on
-              your input, we’ll provide a personalized list of suggestions to
+              activities to dining preferences. Based on
+              your choice, we’ll provide a personalized list of suggestions to
               make your trip truly unforgettable.
             </p>
           </div>
@@ -114,8 +114,8 @@ export default function Home() {
             </p>
           </div>
           <img
-            className="w-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
+            className="w-full rounded-3xl"
+            src="/homepage/images/img3.png"
             alt="dashboard image"></img>
         </div>
       </section>
@@ -129,8 +129,8 @@ export default function Home() {
         </div>
         <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <img
-            className="w-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
+            className="w-full rounded-3xl"
+            src="/homepage/images/img4.png"
             alt="dashboard image"></img>
           <div className="mt-4 md:mt-0">
             <p className="mb-6 font-light text-gray-500 md:text-xl text-gray-600">
