@@ -4,6 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import TripCard from '@/components/TripCard';
 import Link from 'next/link';
+import Button from '@/components/Button';
+
+import EditProfileIcon from '@/../../public/icons/edit-profile.svg';
+import Image from 'next/image';
 
 export default function ProfilePage() {
   const { user } = useUser();
@@ -93,28 +97,39 @@ export default function ProfilePage() {
       {user && (
         <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="border-b border-gray-200 pb-8 mb-8">
-              <h1 className="text-3xl font-medium text-gray-900 mb-2">
-                {user.firstname} {user.lastname}
+            <div className="border-4 border-blue-200 pb-8 mb-8 bg-white bg-gradient-to-br from-blue-800 to-sky-200 rounded-lg p-4 flex flex-col items-center justify-center h-full">
+              <h1 className="text-3xl font-semibold text-white mb-2">
+                🌟 {user.firstname} {user.lastname} 🌟
               </h1>
-              <p className="text-sm text-gray-500">{user.email}</p>
-              <div className="mt-4 space-x-4">
-                <button
+              <p className="text-sm text-white">{user.email}</p>
+              <div className="flex mt-4 space-x-4 ">
+                <Button
                   onClick={openModal}
-                  className="text-sm text-gray-600 hover:text-gray-900 hover:border-b transition-all">
-                  Edit Profile
-                </button>
-                <Link
-                  href={`/auth/resetPassword?email=${user.email}&token=${user.token}`}
-                  className="text-sm text-gray-600 hover:text-gray-900 hover:border-b transition-all">
+                  buttonStyle="space-x-1 text-blue-800 bg-white bg-opacity-70 rounded-lg hover:bg-opacity-80 active:bg-opacity-60 transition-all">
+                  <p>Edit Profile</p>
+                  <Image
+                    priority
+                    src={EditProfileIcon}
+                    height={20}
+                    width={20}
+                    alt="Edit Profile"
+                  />
+                </Button>
+                <Button
+                  onClick={() =>
+                    router.push(
+                      `/auth/resetPassword?email=${user.email}&token=${user.token}`,
+                    )
+                  }
+                  buttonStyle="text-blue-800 bg-white bg-opacity-70 rounded-lg hover:bg-opacity-80 active:bg-opacity-60 transition-all">
                   Change Password
-                </Link>
+                </Button>
               </div>
             </div>
 
             <div className="mb-12">
               <h2 className="text-[30px] font-medium text-gray-900 mb-4 uppercase">
-                Your Trips
+                My Trips
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 {user.itineraties.map(itinerary => (
