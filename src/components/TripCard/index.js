@@ -11,10 +11,10 @@ const TripCard = ({ trip }) => {
 
   return (
     <Link
-      className="rounded-xl overflow-hidden transition-shadow duration-300"
+      className="rounded-2xl overflow-hidden transition-shadow duration-300"
       href={`/itinerary/${trip.id}`}>
-      <div className="relative h-72">
-        <div className="rounded-xl h-full w-full overflow-hidden">
+      <div className="relative h-72 border-4 border-gray-200 rounded-2xl">
+        <div className="rounded-xl  h-full w-full overflow-hidden">
           <img
             src={trip.bgImg}
             alt={trip.destination}
@@ -29,7 +29,7 @@ const TripCard = ({ trip }) => {
         <h2 className="text-lg font-bold leading-tight mb-1">
           {trip.description}
         </h2>
-        <div className="flex items-center gap-1 text-[15px] font-medium text-gray-400 tracking-[0.5px]">
+        <div className="flex items-center gap-1 text-[15px] font-medium text-gray-900 tracking-[0.5px]">
           <img src={pin.src} className="w-4 h-5" />
           <span>{trip.destination}</span>
         </div>

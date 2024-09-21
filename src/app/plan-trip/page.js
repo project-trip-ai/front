@@ -141,10 +141,11 @@ export default function PlanTripPage() {
   useEffect(() => {
     if (user) {
       setLoading(false);
+      console.log("l'état du user : ", user);
     } else {
-      window.location.reload();
+      router.push('/auth/login');
     }
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (
@@ -164,25 +165,31 @@ export default function PlanTripPage() {
           setError('Your subscription is expired');
         } else {
           try {
+            setLoading(true);
             const data = await createItineraryAction(formData);
             if (data.error) {
               setError(data.error);
             } else {
+              setLoading(false);
               router.push(`/itinerary/${data.itinerary.id}`);
             }
           } catch (error) {
+            setLoading(false);
             setError('Failed to create the itinerary.');
           }
         }
       } else if (user.try === false) {
         try {
+          setLoading(true);
           const data = await createItineraryAction(formData);
           if (data.error) {
             setError(data.error);
           } else {
+            setLoading(false);
             router.push(`/itinerary/${data.itinerary.id}`);
           }
         } catch (error) {
+          setLoading(false);
           console.error('Error creating itinerary:', error);
           setError('Failed to create the itinerary.');
         }
@@ -192,40 +199,12 @@ export default function PlanTripPage() {
     } else {
       setError('You have to log in before creating an itinerary');
     }
-
-    // } else if (result.error) {
-    //   setError(result.error);
-    //   console.log("voici l'erreur : ", result.error);
-    // }
-
-    // try {
-    //   const response = await fetch(
-    //     `${process.env.NEXT_PUBLIC_BASE_URL}/createItinerary`,
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(formData),
-    //     },
-    //   );
-    //   if (response.ok) {
-    //     setError('');
-    //     const newItinerary = await response.json();
-    //     router.push(`/itinerary/${newItinerary.id}`);
-    //   } else {
-    //     setError(response.error);
-    //     console.error('Failed to create a new trip : ', response);
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
   }
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 py-20">
-        <div className="w-[36%] min-w-[550px] p-8 space-y-12 bg-white rounded-xl">
+      <div className="min-h-screen flex  items-center justify-center bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 py-20">
+        <div className="w-[36%] min-w-[400px] mx-1 mt-4 p-8 space-y-12 bg-white rounded-xl">
           <h1 className="text-4xl text-center font-extrabold">
             Plan your next adventure
           </h1>

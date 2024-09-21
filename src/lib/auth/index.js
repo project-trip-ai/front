@@ -6,13 +6,13 @@ export const setCookie = async token => {
     name: 'token',
     value: token,
     path: '/',
-    httpOnly: true,
+    // httpOnly: true,
     domain:
       `${process.env.NODE_ENV === 'production'}` === 'true'
         ? process.env.FRONTEND_URL
         : 'localhost',
     maxAge: 24 * 60 * 60,
-    sameSite: 'strict',
+    sameSite: 'lax',
     secure:
       `${process.env.NODE_ENV === 'production'}` === 'true' ? true : false,
   });

@@ -151,6 +151,20 @@ export const getItineraryById = async id => {
   return data;
 };
 
+export const getRecentItineraries = async id => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/recentItinerary`,
+    {
+      method: 'GET',
+    },
+  );
+  if (!response.ok) {
+    throw new Error('Failed get recent itinerary');
+  }
+  const data = await response.json();
+  return data;
+};
+
 //activities
 export const createActivity = async activityData => {
   const response = await fetch(
