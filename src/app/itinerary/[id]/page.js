@@ -4,7 +4,7 @@ import { getItineraryById } from '@/api';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import GMap from '@/components/GMap';
 import Image from 'next/image';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, usePathname } from 'next/navigation';
 import Button from '@/components/Button';
 import DayCard from '@/components/Trips/DayCard';
 
@@ -20,6 +20,7 @@ import {
 export default function ItineraryPage() {
   const router = useRouter();
   const { id } = useParams();
+  const pathname = usePathname();
   const [itineraryData, setItineraryData] = useState('');
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to manage errors
@@ -138,8 +139,13 @@ export default function ItineraryPage() {
             </Button>
             <Button
               buttonStyle={
-                'text-black font-medium bg-gray-300 bg-opacity-20 hover:bg-opacity-50'
-              }>
+                'rounded-md text-black font-medium bg-gray-300 bg-opacity-20 hover:bg-opacity-50'
+              }
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${process.env.NEXT_PUBLIC_URL}${pathname}`,
+                );
+              }}>
               Share
             </Button>
           </div>
@@ -208,6 +214,7 @@ export default function ItineraryPage() {
                   onActivityCreated={handleNewActivity} // Passer le callback pour les nouvelles activités
                   setActiveMarker={setActiveMarker}
                   setActivities={setActivities}
+                  itineraryUserId={itineraryData.userId}
                 />
               );
             })}

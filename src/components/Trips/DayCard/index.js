@@ -17,6 +17,7 @@ const DayCard = ({
   activities,
   date,
   itineraryId,
+  itineraryUserId,
   onActivityCreated,
   setActiveMarker,
   isOpen, // Reçoit l'état d'ouverture du parent
@@ -145,11 +146,15 @@ const DayCard = ({
       {/* Conditionally show the ActivityCard */}
       {isOpen && (
         <div className="space-y-5 mb-16">
-          <AutoComplete
-            autoCompleteOptions={options}
-            placeholderText={'Search for a place'}
-            onPlaceSelected={handlePlaceSelected}
-          />
+          {user && user.id === itineraryUserId ? (
+            <AutoComplete
+              autoCompleteOptions={options}
+              placeholderText={'Search for a place'}
+              onPlaceSelected={handlePlaceSelected}
+            />
+          ) : (
+            <></>
+          )}
           {/* Loading indicator */}
           {loading && <p className="text-blue-500">Creating activity...</p>}
           {/* Error message */}
@@ -160,11 +165,11 @@ const DayCard = ({
               {activities.map((activity, index) => {
                 return (
                   <ActivityCard
-                    name={activity.name}
-                    image={activity.image}
+                    activity={activity}
                     key={index}
                     onHover={() => setActiveMarker(activity.id)}
                     handleDelete={() => handleDelete(activity.id, user.token)}
+                    itineraryUserId={itineraryUserId}
                   />
                 );
               })}
