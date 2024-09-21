@@ -7,15 +7,15 @@ import Link from 'next/link';
 import Input from '@/components/Input';
 
 export default function RegisterForm() {
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const router = useRouter();
 
   async function handleSubmit(formData) {
     const result = await registerAction(formData);
     if (result.error) {
-      setError(result.error);
+      setMessage(result.error);
     } else if (result.success) {
-      router.push('/auth/login');
+      setMessage('success');
     }
   }
 
@@ -25,7 +25,9 @@ export default function RegisterForm() {
         Sign up 😍
       </h2>
       <form action={handleSubmit} className="space-y-4">
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {message && (
+          <p className="text-red-500 text-sm text-center">{message}</p>
+        )}
         <Input label="First name :" id="firstname" name="firstname" required />
         <Input label="Last name :" id="lastname" name="lastname" required />
         <Input

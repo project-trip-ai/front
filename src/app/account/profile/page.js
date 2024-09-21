@@ -86,13 +86,11 @@ export default function ProfilePage() {
     );
   }
 
-  console.log(user, 'userr');
-
   return (
     <>
       {user && (
-        <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 py-[100px] px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white bg-opacity-90 rounded-lg shadow-lg p-8">
             <div className="border-b border-gray-200 pb-8 mb-8">
               <h1 className="text-3xl font-medium text-gray-900 mb-2">
                 {user.firstname} {user.lastname}
@@ -101,12 +99,12 @@ export default function ProfilePage() {
               <div className="mt-4 space-x-4">
                 <button
                   onClick={openModal}
-                  className="text-sm text-gray-600 hover:text-gray-900 hover:border-b transition-all">
+                  className="text-sm text-white bg-blue-600 rounded-md px-4 py-2 hover:bg-blue-700 transition-colors">
                   Edit Profile
                 </button>
                 <Link
                   href={`/auth/resetPassword?email=${user.email}&token=${user.token}`}
-                  className="text-sm text-gray-600 hover:text-gray-900 hover:border-b transition-all">
+                  className="text-sm text-white bg-blue-600 rounded-md px-4 py-2 hover:bg-blue-700 transition-colors">
                   Change Password
                 </Link>
               </div>
@@ -168,7 +166,7 @@ export default function ProfilePage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+          <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
             <h2 className="text-xl font-light text-gray-900 mb-4">
               Edit Profile
             </h2>
@@ -222,12 +220,12 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
+                  className="px-4 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">
                   Save Changes
                 </button>
               </div>
