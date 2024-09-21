@@ -27,7 +27,7 @@ export default function SubscriptionPage() {
 
       const secretCode = product.code;
       const emailUser = user.email;
-      const { data } = await axios.post(process.env.NEXT_PUBLIC_CHECKOUT, { 
+      const { data } = await axios.post(process.env.NEXT_PUBLIC_BACK_URL + "/checkout", { 
           lineItems: [lineItem],
           secretCode, 
           emailUser,
