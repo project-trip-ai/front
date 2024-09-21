@@ -133,7 +133,7 @@ export default function ItineraryPage() {
                 priority
                 src={ArrowLeft}
                 alt="Back Arrow"
-                onClick={() => router.back()}
+                onClick={() => router.push('/')}
               />
             </Button>
             <Button

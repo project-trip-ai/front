@@ -170,7 +170,7 @@ const ActivityCard = ({
           </div>
         ) : null}
       </div>
-      {isModalOpen && (
+      {isModalOpen && user.id === itineraryUserId?(
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
             className="fixed inset-0 bg-black bg-opacity-50"
@@ -214,8 +214,8 @@ const ActivityCard = ({
               </div>
             </form>
           </div>
-        </div>
-      )}
+        </div>,
+      ):<></>}
     </>
   );
 };
