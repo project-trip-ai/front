@@ -90,13 +90,11 @@ export default function ProfilePage() {
     );
   }
 
-  console.log(user, 'userr');
-
   return (
     <>
       {user && (
-        <div className="min-h-screen bg-white py-[100px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto bg-white rounded-lg p-4">
+        <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-600 py-[100px] px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto bg-white rounded-lg p-10">
             <div className="border-4 border-gray-200 pb-8 mb-8 bg-white bg-gradient-to-br from-gray-200 to-gray-100 rounded-lg p-4 flex flex-col items-center justify-center h-full">
               <h1 className="text-3xl font-semibold mb-2">
                 🌟 {user.firstname} {user.lastname} 🌟
@@ -196,7 +194,7 @@ export default function ProfilePage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+          <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
             <h2 className="text-xl font-light text-gray-900 mb-4">
               Edit Profile
             </h2>
@@ -250,12 +248,12 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  className="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
+                  className="px-4 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">
                   Save Changes
                 </button>
               </div>

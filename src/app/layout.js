@@ -5,6 +5,8 @@ import Footer from '../components/Partials/Footer';
 import { isUserLoggedIn, getUserCookies } from '@/lib/auth';
 import { UserProvider } from '../context/UserContext';
 const inter = Inter({ subsets: ['latin'] });
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,6 +21,7 @@ export default async function RootLayout({ children }) {
         <UserProvider userData={userData}>
           <Header isLoggedIn={isLoggedIn} />
           {children}
+          <ToastContainer />
           <Footer />
         </UserProvider>
       </body>

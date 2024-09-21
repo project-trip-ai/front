@@ -30,6 +30,7 @@ export async function loginAction(formData) {
     console.error('Login failed:', error);
     return { error: 'Login failed: ' + (error.message || String(error)) };
   }
+  redirect('/auth/profile');
 }
 
 export async function registerAction(formData) {
@@ -41,15 +42,13 @@ export async function registerAction(formData) {
   if (!email || !password || !firstname || !lastname) {
     return { error: 'All fields are required' };
   }
-
   try {
     const userData = { email, password, firstname, lastname };
+
     const data = await registerUser(userData);
-    console.log(data, 'data');
 
     if (data.token) {
       await setCookie(data.token);
-      return { success: true };
     } else {
       return { error: 'Registration failed: No token received' };
     }
@@ -59,6 +58,7 @@ export async function registerAction(formData) {
       error: 'Registration failed: ' + (error.message || String(error)),
     };
   }
+  redirect('/auth/profile');
 }
 
 export async function logout() {

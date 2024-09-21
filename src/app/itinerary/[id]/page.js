@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { useRouter, useParams, usePathname } from 'next/navigation';
 import Button from '@/components/Button';
 import DayCard from '@/components/Trips/DayCard';
-
 import ArrowLeft from '@/../../public/icons/arrow-left.svg';
 import ArrowRight from '@/../../public/icons//arrow-right.svg';
 
