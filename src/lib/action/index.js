@@ -238,9 +238,7 @@ export async function resetPassword(email, code, password) {
       );
 
       if (resetResponse.ok) {
-        return {
-          success: true,
-        };
+        console.log("Reset ok")
       } else {
         return { error: 'Failed to reset password.' };
       }
