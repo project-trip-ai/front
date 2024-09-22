@@ -17,6 +17,7 @@ const ChicHeader = ({ isLoggedIn }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  
   const handleLinkClick = link => {
     setActiveLink(link);
   };
