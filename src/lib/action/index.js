@@ -30,7 +30,7 @@ export async function loginAction(formData) {
     console.error('Login failed:', error);
     return { error: 'Login failed: ' + (error.message || String(error)) };
   }
-  redirect('/auth/profile');
+  redirect('/account/profile');
 }
 
 export async function registerAction(formData) {
@@ -58,7 +58,7 @@ export async function registerAction(formData) {
       error: 'Registration failed: ' + (error.message || String(error)),
     };
   }
-  redirect('/auth/profile');
+  redirect('/account/profile');
 }
 
 export async function logout() {

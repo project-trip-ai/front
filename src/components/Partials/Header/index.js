@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { logout } from '@/lib/action';
 import { usePathname } from 'next/navigation';
+import WebsiteIcon from '@/../../public/icons/website-icon.svg';
+import Image from 'next/image';
 const ChicHeader = ({ isLoggedIn }) => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState('');
@@ -60,9 +62,18 @@ const ChicHeader = ({ isLoggedIn }) => {
           href="/"
           onClick={() => handleLinkClick('/')}
           className={`flex items-center ${activeLink === '/' ? '' : 'text-white'}`}>
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Wizard Planner
-          </span>
+          <div className="flex space-x-2">
+            <Image
+              priority
+              src={WebsiteIcon}
+              alt="Icon"
+              height={60}
+              width={60}
+            />{' '}
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              Wizard Planner
+            </span>
+          </div>
         </Link>
         <div className="flex items-center lg:order-2">
           {isLoggedIn !== false ? (
