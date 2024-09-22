@@ -22,13 +22,13 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-[url('https://img.freepik.com/photos-gratuite/atmosphere-reve-scene-couleurs-pastel-pour-contenu-voyage_23-2151450710.jpg?t=st=1726956926~exp=1726960526~hmac=90222737a05ac8902ec140d6c1cb63bc845420f0e8f5ce1c7e8f3d397222d74e&w=1480')] bg-cover">
+      <div className="min-h-screen flex items-center justify-center bg-[url('/bg.jpg')] bg-cover">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
               One click connects you to the world 🤩.{' '}
             </h1>
-            <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-base lg:text-lg dark:text-gray-200">
+            <p className="max-w-2xl mb-6 font-light lg:mb-8 md:text-base lg:text-lg text-white">
               With just one click, unlock a world of adventure. Explore new
               places, discover hidden gems, and create unforgettable memories -
               all effortlessly tailored to you. Start your journey today and
